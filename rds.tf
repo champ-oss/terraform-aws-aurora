@@ -33,6 +33,7 @@ resource "aws_rds_cluster" "this" {
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   database_name                       = var.database_name
   db_cluster_instance_class           = var.db_cluster_instance_class
+  db_cluster_parameter_group_name     = var.db_cluster_parameter_group_name
   db_instance_parameter_group_name    = var.db_instance_parameter_group_name
   db_subnet_group_name                = aws_db_subnet_group.this.id
   deletion_protection                 = var.protect
