@@ -183,6 +183,12 @@ variable "max_capacity" {
   default     = 1
 }
 
+variable "monitoring_interval" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#monitoring_interval"
+  type        = number
+  default     = 60
+}
+
 variable "mysql_iam_read_username" {
   description = "read only user to be created via lambda function"
   type        = string

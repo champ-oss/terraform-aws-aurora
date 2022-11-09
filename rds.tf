@@ -83,4 +83,5 @@ resource "aws_rds_cluster_instance" "this" {
   engine              = aws_rds_cluster.this.engine
   engine_version      = aws_rds_cluster.this.engine_version
   monitoring_role_arn = aws_iam_role.rds_enhanced_monitoring.arn
+  monitoring_interval = var.monitoring_interval
 }
