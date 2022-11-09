@@ -78,10 +78,13 @@ resource "aws_rds_cluster" "this" {
 }
 
 resource "aws_rds_cluster_instance" "this" {
-  cluster_identifier  = aws_rds_cluster.this.id
-  instance_class      = "db.serverless"
-  engine              = aws_rds_cluster.this.engine
-  engine_version      = aws_rds_cluster.this.engine_version
-  monitoring_role_arn = aws_iam_role.rds_enhanced_monitoring.arn
-  monitoring_interval = var.monitoring_interval
+  cluster_identifier    = aws_rds_cluster.this.id
+  copy_tags_to_snapshot = var.copy_tags_to_snapshot
+  identifier_prefix     = "${var.cluster_identifier_prefix}-"
+  instance_class        = "db.serverless"
+  engine                = aws_rds_cluster.this.engine
+  engine_version        = aws_rds_cluster.this.engine_version
+  monitoring_role_arn   = aws_iam_role.rds_enhanced_monitoring.arn
+  monitoring_interval   = var.monitoring_interval
+  tags                  = merge(local.tags, var.tags)
 }
