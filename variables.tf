@@ -1,3 +1,9 @@
+variable "alarms_email" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription#endpoint"
+  type        = string
+  default     = null
+}
+
 variable "availability_zones" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#availability_zones"
   type        = list(string)
@@ -198,7 +204,31 @@ variable "min_capacity" {
 variable "max_capacity" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#max_capacity"
   type        = number
+  default     = 8 # each ACU corresponds to approximately 2 GiB of memory
+}
+
+variable "metric_alarms_enabled" {
+  description = "enable or disable cloudwatch metric alarms"
+  type        = bool
+  default     = false
+}
+
+variable "metric_evaluation_periods" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#evaluation_periods"
+  type        = number
   default     = 1
+}
+
+variable "metric_period" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#period"
+  type        = number
+  default     = 300 # in seconds
+}
+
+variable "metric_threshold_acu_utilization" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+  type        = number
+  default     = 75
 }
 
 variable "monitoring_interval" {
