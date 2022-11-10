@@ -296,6 +296,12 @@ variable "protect" {
   type        = bool
 }
 
+variable "promotion_tier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#promotion_tier"
+  type        = number
+  default     = null
+}
+
 variable "replication_source_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#replication_source_identifier"
   type        = string

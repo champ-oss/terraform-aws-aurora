@@ -92,5 +92,6 @@ resource "aws_rds_cluster_instance" "this" {
   monitoring_interval                   = var.monitoring_interval
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
+  promotion_tier                        = var.promotion_tier
   tags                                  = merge(local.tags, var.tags)
 }
