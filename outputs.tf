@@ -18,19 +18,14 @@ output "cluster_members" {
   value       = aws_rds_cluster.this.cluster_members
 }
 
-output "endpoint" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#endpoint"
-  value       = aws_rds_cluster.this.endpoint
-}
-
-output "reader_endpoint" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#reader_endpoint"
-  value       = aws_rds_cluster.this.reader_endpoint
-}
-
 output "database_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_name"
   value       = aws_rds_cluster.this.database_name
+}
+
+output "endpoint" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#endpoint"
+  value       = aws_rds_cluster.this.endpoint
 }
 
 output "master_username" {
@@ -47,4 +42,14 @@ output "master_password" {
 output "port" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#port"
   value       = aws_rds_cluster.this.port
+}
+
+output "reader_endpoint" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#reader_endpoint"
+  value       = aws_rds_cluster.this.reader_endpoint
+}
+
+output "security_group_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#id"
+  value       = aws_security_group.rds.id
 }
