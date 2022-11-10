@@ -12,7 +12,7 @@ resource "aws_cloudwatch_metric_alarm" "acu_utilization" {
   ok_actions          = [aws_sns_topic.this.arn]
 
   dimensions = {
-    DBInstanceIdentifier = aws_rds_cluster.this.cluster_identifier
+    DBClusterIdentifier = aws_rds_cluster.this.cluster_identifier
   }
   tags = merge(local.tags, var.tags)
 }
