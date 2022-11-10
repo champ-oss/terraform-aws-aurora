@@ -15,7 +15,7 @@ module "iam_auth_lambda" {
   tags                = merge(local.tags, var.tags)
   description         = "iam auth rds database lambda function"
   enable_cw_event     = true
-  schedule_expression = "cron(0 10 ? * 1 *)" # lambda executes every Sunday at 10am UTC
+  schedule_expression = "rate(1 hour)"
   enable_vpc          = true
   private_subnet_ids  = var.private_subnet_ids
   sync_image          = true
