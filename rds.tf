@@ -78,13 +78,19 @@ resource "aws_rds_cluster" "this" {
 }
 
 resource "aws_rds_cluster_instance" "this" {
-  cluster_identifier    = aws_rds_cluster.this.id
-  copy_tags_to_snapshot = var.copy_tags_to_snapshot
-  identifier_prefix     = "${var.cluster_identifier_prefix}-"
-  instance_class        = "db.serverless"
-  engine                = aws_rds_cluster.this.engine
-  engine_version        = aws_rds_cluster.this.engine_version
-  monitoring_role_arn   = aws_iam_role.rds_enhanced_monitoring.arn
-  monitoring_interval   = var.monitoring_interval
-  tags                  = merge(local.tags, var.tags)
+  count = var.cluster_instance_count
+
+  apply_immediately                     = !var.protect
+  auto_minor_version_upgrade            = var.auto_minor_version_upgrade
+  cluster_identifier                    = aws_rds_cluster.this.id
+  copy_tags_to_snapshot                 = var.copy_tags_to_snapshot
+  engine                                = aws_rds_cluster.this.engine
+  engine_version                        = aws_rds_cluster.this.engine_version
+  identifier_prefix                     = "${var.cluster_identifier_prefix}-"
+  instance_class                        = var.instance_class
+  monitoring_role_arn                   = aws_iam_role.rds_enhanced_monitoring.arn
+  monitoring_interval                   = var.monitoring_interval
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_retention_period
+  tags                                  = merge(local.tags, var.tags)
 }

@@ -17,14 +17,16 @@ resource "aws_security_group" "test" {
 }
 
 module "this" {
-  source                              = "../../"
-  cluster_identifier_prefix           = var.git
-  private_subnet_ids                  = module.vpc.private_subnets_ids
-  source_security_group_id            = aws_security_group.test.id
-  vpc_id                              = module.vpc.vpc_id
-  protect                             = false
-  skip_final_snapshot                 = true
+  source = "../../"
+
   backup_retention_period             = 1
+  cluster_identifier_prefix           = var.git
+  cluster_instance_count              = 3
   iam_database_authentication_enabled = true
   iam_auth_lambda_enabled             = true
+  private_subnet_ids                  = module.vpc.private_subnets_ids
+  protect                             = false
+  skip_final_snapshot                 = true
+  source_security_group_id            = aws_security_group.test.id
+  vpc_id                              = module.vpc.vpc_id
 }

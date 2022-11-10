@@ -10,6 +10,12 @@ variable "allow_major_version_upgrade" {
   type        = bool
 }
 
+variable "auto_minor_version_upgrade" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#auto_minor_version_upgrade"
+  type        = bool
+  default     = true
+}
+
 variable "backtrack_window" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#backtrack_window"
   type        = number
@@ -32,6 +38,12 @@ variable "cluster_identifier_prefix" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#cluster_identifier_prefix"
   type        = string
   default     = "mysqldb-test"
+}
+
+variable "cluster_instance_count" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance"
+  type        = number
+  default     = 1
 }
 
 variable "copy_tags_to_snapshot" {
@@ -141,6 +153,12 @@ variable "iam_roles" {
   default     = null
 }
 
+variable "instance_class" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#instance_class"
+  type        = string
+  default     = "db.serverless"
+}
+
 variable "kms_key_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#kms_key_id"
   type        = string
@@ -211,6 +229,18 @@ variable "port" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#port"
   type        = string
   default     = null
+}
+
+variable "performance_insights_enabled" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#performance_insights_enabled"
+  type        = bool
+  default     = false
+}
+
+variable "performance_insights_retention_period" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#performance_insights_retention_period"
+  type        = number
+  default     = 7
 }
 
 variable "preferred_backup_window" {
