@@ -240,7 +240,7 @@ variable "performance_insights_enabled" {
 variable "performance_insights_retention_period" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#performance_insights_retention_period"
   type        = number
-  default     = 7
+  default     = null
 }
 
 variable "preferred_backup_window" {
