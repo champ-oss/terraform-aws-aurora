@@ -24,7 +24,7 @@ module "iam_auth_lambda" {
   ecr_tag             = var.iam_auth_docker_tag
   vpc_id              = var.vpc_id # eni delete resource bug https://github.com/hashicorp/terraform-provider-aws/issues/10329
   environment = {
-    DB_HOST         = aws_rds_cluster.this.endpoint
+    DB_HOST         = "${aws_rds_cluster.this.endpoint}:${aws_rds_cluster.this.port}"
     DB_USERNAME     = aws_rds_cluster.this.master_username
     SSM_NAME        = aws_ssm_parameter.this.name
     RO_USER_NAME    = var.mysql_iam_read_username
