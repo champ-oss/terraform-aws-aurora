@@ -35,4 +35,8 @@ resource "aws_dms_replication_task" "this" {
   })
   tags                = merge(local.tags, var.tags)
   target_endpoint_arn = aws_dms_endpoint.this[0].endpoint_arn
+
+  lifecycle {
+    ignore_changes = [replication_task_settings]
+  }
 }
