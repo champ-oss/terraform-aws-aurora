@@ -64,6 +64,12 @@ variable "create_dms_endpoint" {
   default     = false
 }
 
+variable "create_dms_replication_task" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task"
+  type        = bool
+  default     = false
+}
+
 variable "database_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_name"
   type        = string
@@ -98,6 +104,30 @@ variable "dms_endpoint_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
   type        = string
   default     = "target"
+}
+
+variable "dms_migration_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#migration_type"
+  type        = string
+  default     = "full-load-and-cdc"
+}
+
+variable "dms_replication_instance_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#replication_instance_arn"
+  type        = string
+  default     = null
+}
+
+variable "dms_source_endpoint_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#source_endpoint_arn"
+  type        = string
+  default     = null
+}
+
+variable "dms_source_schema_name" {
+  description = "Name of source schema"
+  type        = string
+  default     = "this"
 }
 
 variable "enable_global_write_forwarding" {
