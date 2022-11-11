@@ -34,5 +34,5 @@ resource "aws_dms_replication_task" "this" {
     ]
   })
   tags                = merge(local.tags, var.tags)
-  target_endpoint_arn = aws_dms_endpoint.this.endpoint_arn
+  target_endpoint_arn = aws_dms_endpoint.this[0].endpoint_arn
 }
