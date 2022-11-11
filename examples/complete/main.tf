@@ -29,4 +29,5 @@ module "this" {
   skip_final_snapshot                 = true
   source_security_group_id            = aws_security_group.test.id
   vpc_id                              = module.vpc.vpc_id
+  create_dms_endpoint                 = true
 }

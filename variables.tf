@@ -58,6 +58,12 @@ variable "copy_tags_to_snapshot" {
   default     = true
 }
 
+variable "create_dms_endpoint" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
+  type        = bool
+  default     = false
+}
+
 variable "database_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_name"
   type        = string
@@ -86,6 +92,12 @@ variable "db_snapshot_source_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
   type        = string
   default     = null
+}
+
+variable "dms_endpoint_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
+  type        = string
+  default     = "target"
 }
 
 variable "enable_global_write_forwarding" {
