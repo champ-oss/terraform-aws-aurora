@@ -78,8 +78,7 @@ resource "aws_rds_cluster" "this" {
 }
 
 resource "aws_rds_cluster_instance" "this" {
-  count = var.cluster_instance_count
-
+  count                                 = var.cluster_instance_count
   apply_immediately                     = !var.protect
   auto_minor_version_upgrade            = var.auto_minor_version_upgrade
   cluster_identifier                    = aws_rds_cluster.this.id

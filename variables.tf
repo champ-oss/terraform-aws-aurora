@@ -341,7 +341,7 @@ variable "protect" {
 variable "promotion_tier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#promotion_tier"
   type        = number
-  default     = null
+  default     = 2
 }
 
 variable "replication_source_identifier" {
