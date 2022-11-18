@@ -1,4 +1,5 @@
 resource "aws_dms_endpoint" "this" {
+  depends_on    = [aws_rds_cluster_instance.this]
   count         = var.create_dms_endpoint ? 1 : 0
   endpoint_id   = "${aws_rds_cluster.this.cluster_identifier}-dms-endpoint"
   endpoint_type = var.dms_endpoint_type
@@ -12,6 +13,7 @@ resource "aws_dms_endpoint" "this" {
 }
 
 resource "aws_dms_replication_task" "this" {
+  depends_on               = [aws_rds_cluster_instance.this]
   count                    = var.create_dms_replication_task ? 1 : 0
   migration_type           = var.dms_migration_type
   replication_instance_arn = var.dms_replication_instance_arn
