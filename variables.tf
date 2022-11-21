@@ -1,3 +1,9 @@
+variable "account_actions" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#policy"
+  type        = list(object({ account = string, actions = list(string) }))
+  default     = []
+}
+
 variable "alarms_email" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription#endpoint"
   type        = string
@@ -64,6 +70,12 @@ variable "create_dms_endpoint" {
   default     = false
 }
 
+variable "create_kms" {
+  description = "Create a KMS key for the database cluster"
+  type        = bool
+  default     = true
+}
+
 variable "create_dms_replication_task" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task"
   type        = bool
@@ -98,6 +110,12 @@ variable "db_snapshot_source_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
   type        = string
   default     = null
+}
+
+variable "deletion_window_in_days" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#deletion_window_in_days"
+  type        = number
+  default     = 30
 }
 
 variable "dms_endpoint_type" {
@@ -395,3 +413,6 @@ variable "vpc_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id"
   type        = string
 }
+
+
+
