@@ -1,6 +1,7 @@
 variable "account_actions" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#policy"
   type        = list(object({ account = string, actions = list(string) }))
+  default     = []
 }
 
 variable "alarms_email" {
