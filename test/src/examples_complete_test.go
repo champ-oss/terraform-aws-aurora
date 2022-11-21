@@ -19,5 +19,11 @@ func TestExamplesComplete(t *testing.T) {
 		EnvVars: map[string]string{},
 		Vars:    map[string]interface{}{},
 	}
+	defer removeCacheFromState(t, terraformOptions)
 	terraform.InitAndApplyAndIdempotent(t, terraformOptions)
+}
+
+func removeCacheFromState(t *testing.T, options *terraform.Options) {
+	t.Log("removing ecr cache resources from state")
+	_, _ = terraform.RunTerraformCommandE(t, options, "state", "rm", "module.this.module.iam_auth_lambda[0].module.ecr_cache[0].null_resource.sync_image_to_ecr")
 }
