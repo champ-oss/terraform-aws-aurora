@@ -28,6 +28,11 @@ output "endpoint" {
   value       = aws_rds_cluster.this.endpoint
 }
 
+output "kms_key_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#key_id"
+  value       = var.create_kms ? module.kms[0].key_id : var.kms_key_id
+}
+
 output "master_username" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#master_username"
   value       = aws_rds_cluster.this.master_username
