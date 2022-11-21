@@ -19,7 +19,7 @@ func TestExamplesComplete(t *testing.T) {
 		EnvVars: map[string]string{},
 		Vars:    map[string]interface{}{},
 	}
-	defer removeCacheFromState(t, terraformOptions)
+	removeCacheFromState(t, terraformOptions)
 	terraform.InitAndApplyAndIdempotent(t, terraformOptions)
 }
 
