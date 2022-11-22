@@ -44,6 +44,11 @@ output "master_password" {
   sensitive   = true
 }
 
+output "password_ssm_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter#name"
+  value       = aws_ssm_parameter.this.name
+}
+
 output "port" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#port"
   value       = aws_rds_cluster.this.port
