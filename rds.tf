@@ -75,7 +75,7 @@ resource "aws_rds_cluster" "this" {
       final_snapshot_identifier,
     ]
     replace_triggered_by = [
-      snapshot_identifier
+      aws_rds_cluster.this.snapshot_identifier
     ]
   }
 }
