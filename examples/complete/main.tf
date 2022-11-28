@@ -32,8 +32,7 @@ resource "aws_security_group" "test" {
 }
 
 module "this" {
-  source = "../../"
-
+  source                              = "../../"
   backup_retention_period             = 1
   cluster_identifier_prefix           = var.git
   cluster_instance_count              = 3

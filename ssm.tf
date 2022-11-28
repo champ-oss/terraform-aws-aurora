@@ -9,3 +9,15 @@ resource "aws_ssm_parameter" "this" {
     create_before_destroy = true
   }
 }
+
+resource "aws_ssm_parameter" "snapshot" {
+  name        = "/${var.git}/mysql/${aws_rds_cluster.this.cluster_identifier}/snapshot"
+  description = "snapshot name"
+  type        = "SecureString"
+  value       = var.snapshot_identifier
+  tags        = merge(local.tags, var.tags)
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
