@@ -14,7 +14,7 @@ resource "aws_ssm_parameter" "snapshot" {
   name        = "/${var.git}/mysql/${var.cluster_identifier_prefix}/snapshot"
   description = "snapshot name"
   type        = "SecureString"
-  value       = var.snapshot_identifier
+  value       = var.snapshot_identifier != null ? var.snapshot_identifier : ""
   tags        = merge(local.tags, var.tags)
 
   lifecycle {
