@@ -69,6 +69,17 @@ resource "aws_rds_cluster" "this" {
     min_capacity = var.min_capacity
   }
 
+  //noinspection ConflictingProperties
+  dynamic "restore_to_point_in_time" {
+    for_each = var.source_cluster_identifier != null ? [1] : []
+    content {
+      restore_to_time            = var.restore_to_time
+      restore_type               = var.restore_type
+      source_cluster_identifier  = var.source_cluster_identifier
+      use_latest_restorable_time = var.use_latest_restorable_time
+    }
+  }
+
   lifecycle {
     ignore_changes = [
       availability_zones,

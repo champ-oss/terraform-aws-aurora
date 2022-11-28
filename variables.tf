@@ -368,6 +368,18 @@ variable "replication_source_identifier" {
   default     = null
 }
 
+variable "restore_to_time" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_to_time"
+  type        = string
+  default     = null
+}
+
+variable "restore_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_type"
+  type        = string
+  default     = "full-copy"
+}
+
 variable "skip_final_snapshot" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
   default     = false
@@ -376,6 +388,12 @@ variable "skip_final_snapshot" {
 
 variable "snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
+  type        = string
+  default     = null
+}
+
+variable "source_cluster_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#source_cluster_identifier"
   type        = string
   default     = null
 }
@@ -407,6 +425,12 @@ variable "tags" {
   description = "Map of tags to assign to resources"
   type        = map(string)
   default     = {}
+}
+
+variable "use_latest_restorable_time" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#use_latest_restorable_time"
+  type        = bool
+  default     = true
 }
 
 variable "vpc_id" {
