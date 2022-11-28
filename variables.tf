@@ -1,9 +1,3 @@
-variable "account_actions" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#policy"
-  type        = list(object({ account = string, actions = list(string) }))
-  default     = []
-}
-
 variable "alarms_email" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription#endpoint"
   type        = string
@@ -16,10 +10,16 @@ variable "availability_zones" {
   default     = null
 }
 
+variable "allow_external_principals" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ram_resource_share#allow_external_principals"
+  type        = bool
+  default     = false
+}
+
 variable "allow_major_version_upgrade" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#allow_major_version_upgrade"
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "auto_minor_version_upgrade" {
@@ -378,6 +378,12 @@ variable "restore_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_type"
   type        = string
   default     = "copy-on-write"
+}
+
+variable "shared_accounts" {
+  description = "AWS accounts to share the RDS cluster"
+  type        = list(string)
+  default     = []
 }
 
 variable "skip_final_snapshot" {
