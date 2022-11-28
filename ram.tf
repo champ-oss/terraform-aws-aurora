@@ -6,7 +6,7 @@ resource "aws_ram_resource_share" "this" {
 }
 
 resource "aws_ram_principal_association" "this" {
-  for_each           = var.shared_accounts
+  for_each           = toset(var.shared_accounts)
   principal          = each.value
   resource_share_arn = aws_ram_resource_share.this[0].arn
 }
