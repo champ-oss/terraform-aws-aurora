@@ -377,7 +377,7 @@ variable "restore_to_time" {
 variable "restore_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_type"
   type        = string
-  default     = "full-copy"
+  default     = "copy-on-write"
 }
 
 variable "skip_final_snapshot" {
