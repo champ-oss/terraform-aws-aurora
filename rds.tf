@@ -69,6 +69,7 @@ resource "aws_rds_cluster" "this" {
     min_capacity = var.min_capacity
   }
 
+  # tflint-ignore: terraform_comment_syntax
   //noinspection ConflictingProperties
   dynamic "restore_to_point_in_time" {
     for_each = var.source_cluster_identifier != null ? [1] : []
