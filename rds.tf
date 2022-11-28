@@ -16,7 +16,7 @@ data "aws_db_snapshot" "this" {
 resource "aws_db_subnet_group" "this" {
   name_prefix = "${var.cluster_identifier_prefix}-"
   subnet_ids  = var.private_subnet_ids
-  tags        = merge(local.tags, var.tags)
+  tags        = merge({ snapshot_identifier = var.snapshot_identifier }, local.tags, var.tags)
 
   lifecycle {
     create_before_destroy = true
@@ -75,7 +75,7 @@ resource "aws_rds_cluster" "this" {
       final_snapshot_identifier,
     ]
     replace_triggered_by = [
-      aws_ssm_parameter.snapshot.value
+      aws_db_subnet_group.this.tags["snapshot_identifier"]
     ]
   }
 }
