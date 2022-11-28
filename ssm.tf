@@ -1,5 +1,5 @@
 resource "aws_ssm_parameter" "this" {
-  name        = "/${var.git}/mysql/${aws_rds_cluster.this.cluster_identifier}/password"
+  name        = "/${var.git}/mysql/${var.cluster_identifier_prefix}/password"
   description = "mysql password"
   type        = "SecureString"
   value       = random_password.password.result
@@ -11,7 +11,7 @@ resource "aws_ssm_parameter" "this" {
 }
 
 resource "aws_ssm_parameter" "snapshot" {
-  name        = "/${var.git}/mysql/${aws_rds_cluster.this.cluster_identifier}/snapshot"
+  name        = "/${var.git}/mysql/${var.cluster_identifier_prefix}/snapshot"
   description = "snapshot name"
   type        = "SecureString"
   value       = var.snapshot_identifier
