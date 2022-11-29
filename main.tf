@@ -7,4 +7,16 @@ locals {
     creator = "terraform"
     git     = var.git
   }
+
+  default_kms_policy_actions = [
+    "kms:CreateGrant",
+    "kms:Decrypt",
+    "kms:DescribeKey",
+    "kms:Encrypt",
+    "kms:GenerateDataKey*",
+    "kms:ListGrants",
+    "kms:ReEncrypt*",
+    "kms:RetireGrant",
+    "kms:RevokeGrant",
+  ]
 }

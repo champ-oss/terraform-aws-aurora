@@ -1,9 +1,3 @@
-variable "account_actions" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#policy"
-  type        = list(object({ account = string, actions = list(string) }))
-  default     = []
-}
-
 variable "alarms_email" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription#endpoint"
   type        = string
@@ -16,10 +10,16 @@ variable "availability_zones" {
   default     = null
 }
 
+variable "allow_external_principals" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ram_resource_share#allow_external_principals"
+  type        = bool
+  default     = false
+}
+
 variable "allow_major_version_upgrade" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#allow_major_version_upgrade"
-  default     = false
   type        = bool
+  default     = false
 }
 
 variable "auto_minor_version_upgrade" {
@@ -368,6 +368,24 @@ variable "replication_source_identifier" {
   default     = null
 }
 
+variable "restore_to_time" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_to_time"
+  type        = string
+  default     = null
+}
+
+variable "restore_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#restore_type"
+  type        = string
+  default     = "copy-on-write"
+}
+
+variable "shared_accounts" {
+  description = "AWS accounts to share the RDS cluster"
+  type        = list(string)
+  default     = []
+}
+
 variable "skip_final_snapshot" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
   default     = false
@@ -376,6 +394,12 @@ variable "skip_final_snapshot" {
 
 variable "snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
+  type        = string
+  default     = null
+}
+
+variable "source_cluster_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#source_cluster_identifier"
   type        = string
   default     = null
 }
@@ -407,6 +431,12 @@ variable "tags" {
   description = "Map of tags to assign to resources"
   type        = map(string)
   default     = {}
+}
+
+variable "use_latest_restorable_time" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#use_latest_restorable_time"
+  type        = bool
+  default     = true
 }
 
 variable "vpc_id" {

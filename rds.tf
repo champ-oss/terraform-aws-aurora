@@ -16,7 +16,7 @@ data "aws_db_snapshot" "this" {
 resource "aws_db_subnet_group" "this" {
   name_prefix = "${var.cluster_identifier_prefix}-"
   subnet_ids  = var.private_subnet_ids
-  tags        = merge(local.tags, var.tags)
+  tags        = merge({ snapshot_identifier = var.snapshot_identifier }, local.tags, var.tags)
 
   lifecycle {
     create_before_destroy = true
@@ -69,10 +69,25 @@ resource "aws_rds_cluster" "this" {
     min_capacity = var.min_capacity
   }
 
+  # tflint-ignore: terraform_comment_syntax
+  //noinspection ConflictingProperties
+  dynamic "restore_to_point_in_time" {
+    for_each = var.source_cluster_identifier != null ? [1] : []
+    content {
+      restore_to_time            = var.restore_to_time
+      restore_type               = var.restore_type
+      source_cluster_identifier  = var.source_cluster_identifier
+      use_latest_restorable_time = var.use_latest_restorable_time
+    }
+  }
+
   lifecycle {
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
+    ]
+    replace_triggered_by = [
+      aws_db_subnet_group.this.tags["snapshot_identifier"]
     ]
   }
 }
