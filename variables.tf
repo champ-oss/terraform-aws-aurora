@@ -124,6 +124,12 @@ variable "dms_endpoint_type" {
   default     = "target"
 }
 
+variable "dms_full_lob_mode" {
+  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.TargetMetadata.html"
+  type        = bool
+  default     = true
+}
+
 variable "dms_migration_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#migration_type"
   type        = string

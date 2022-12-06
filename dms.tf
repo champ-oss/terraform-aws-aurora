@@ -10,6 +10,11 @@ resource "aws_dms_endpoint" "this" {
   server_name   = aws_rds_cluster.this.endpoint
   tags          = merge(local.tags, var.tags)
   username      = aws_rds_cluster.this.master_username
+
+  timeouts {
+    create = "60m"
+    delete = "60m"
+  }
 }
 
 resource "aws_dms_replication_task" "this" {
@@ -170,13 +175,13 @@ resource "aws_dms_replication_task" "this" {
         "TargetSchema" : "",
         "InlineLobMaxSize" : 0,
         "ParallelLoadQueuesPerThread" : 0,
-        "SupportLobs" : true,
+        "SupportLobs" : var.dms_full_lob_mode,
         "LobChunkSize" : 64,
         "TaskRecoveryTableEnabled" : false,
         "ParallelLoadThreads" : 0,
         "LobMaxSize" : 0,
         "BatchApplyEnabled" : true,
-        "FullLobMode" : true,
+        "FullLobMode" : var.dms_full_lob_mode,
         "LimitedSizeLobMode" : false,
         "LoadMaxFileSize" : 0,
         "ParallelLoadBufferSize" : 0
