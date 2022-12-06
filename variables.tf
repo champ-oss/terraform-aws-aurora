@@ -148,6 +148,18 @@ variable "dms_source_schema_name" {
   default     = "this"
 }
 
+variable "dms_table_failure_max_count" {
+  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.DataValidation.html"
+  type        = number
+  default     = 1
+}
+
+variable "dms_target_table_prep_mode" {
+  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.FullLoad.html"
+  type        = string
+  default     = "DROP_AND_CREATE"
+}
+
 variable "enable_global_write_forwarding" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#enable_global_write_forwarding"
   type        = string
