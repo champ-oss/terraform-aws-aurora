@@ -10,6 +10,12 @@ resource "aws_dms_endpoint" "this" {
   server_name   = aws_rds_cluster.this.endpoint
   tags          = merge(local.tags, var.tags)
   username      = aws_rds_cluster.this.master_username
+  
+  timeouts {
+    create = "60m"
+    update = "60m"
+    delete = "60m"
+  }
 }
 
 resource "aws_dms_replication_task" "this" {
