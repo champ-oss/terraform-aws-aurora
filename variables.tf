@@ -157,7 +157,7 @@ variable "dms_source_schema_name" {
 variable "dms_table_failure_max_count" {
   description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.DataValidation.html"
   type        = number
-  default     = 1
+  default     = 0
 }
 
 variable "dms_target_table_prep_mode" {

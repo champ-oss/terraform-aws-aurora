@@ -178,7 +178,7 @@ resource "aws_dms_replication_task" "this" {
         "TaskRecoveryTableEnabled" : false,
         "ParallelLoadThreads" : 0,
         "LobMaxSize" : 0,
-        "BatchApplyEnabled" : true,
+        "BatchApplyEnabled" : false,
         "FullLobMode" : var.dms_full_lob_mode,
         "LimitedSizeLobMode" : false,
         "LoadMaxFileSize" : 0,
