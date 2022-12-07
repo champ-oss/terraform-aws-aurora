@@ -186,7 +186,7 @@ resource "aws_dms_replication_task" "this" {
       },
       "BeforeImageSettings" : null,
       "ControlTablesSettings" : {
-        "historyTimeslotInMinutes" : 5,
+        "HistoryTimeslotInMinutes" : 5,
         "StatusTableEnabled" : false,
         "SuspendedTablesTableEnabled" : false,
         "HistoryTableEnabled" : false,
