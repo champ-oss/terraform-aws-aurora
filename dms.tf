@@ -105,8 +105,6 @@ resource "aws_dms_replication_task" "this" {
             "Id" : "FILE_TRANSFER"
           }
         ],
-        "CloudWatchLogGroup" : "dms-tasks-${aws_rds_cluster.this.cluster_identifier}",
-        "CloudWatchLogStream" : "dms-task-${aws_rds_cluster.this.cluster_identifier}",
       },
       "StreamBufferSettings" : {
         "StreamBufferCount" : 3,
