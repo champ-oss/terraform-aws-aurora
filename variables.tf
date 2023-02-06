@@ -328,7 +328,7 @@ variable "promotion_tier" {
 
 variable "publicly_accessible" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#publicly_accessible"
-  type        = string
+  type        = bool
   default     = false
 }
 
