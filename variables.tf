@@ -64,12 +64,6 @@ variable "copy_tags_to_snapshot" {
   default     = true
 }
 
-variable "create_dms_endpoint" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
-  type        = bool
-  default     = false
-}
-
 variable "create_kms" {
   description = "Create a KMS key for the database cluster"
   type        = bool
@@ -116,54 +110,6 @@ variable "deletion_window_in_days" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#deletion_window_in_days"
   type        = number
   default     = 30
-}
-
-variable "dms_endpoint_type" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
-  type        = string
-  default     = "target"
-}
-
-variable "dms_full_lob_mode" {
-  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.TargetMetadata.html"
-  type        = bool
-  default     = true
-}
-
-variable "dms_migration_type" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#migration_type"
-  type        = string
-  default     = "full-load-and-cdc"
-}
-
-variable "dms_replication_instance_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#replication_instance_arn"
-  type        = string
-  default     = null
-}
-
-variable "dms_source_endpoint_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task#source_endpoint_arn"
-  type        = string
-  default     = null
-}
-
-variable "dms_source_schema_name" {
-  description = "Name of source schema"
-  type        = string
-  default     = "this"
-}
-
-variable "dms_table_failure_max_count" {
-  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.DataValidation.html"
-  type        = number
-  default     = 0
-}
-
-variable "dms_target_table_prep_mode" {
-  description = "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.FullLoad.html"
-  type        = string
-  default     = "DROP_AND_CREATE"
 }
 
 variable "enable_global_write_forwarding" {
