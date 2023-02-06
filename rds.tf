@@ -61,7 +61,7 @@ resource "aws_rds_cluster" "this" {
   source_region                       = var.source_region
   storage_type                        = var.storage_type
   storage_encrypted                   = var.storage_encrypted
-  tags                                = merge({ password_ssm_name = "/${var.git}/mysql/${aws_rds_cluster.this.cluster_identifier}/password" }, local.tags, var.tags)
+  tags                                = merge(local.tags, var.tags)
   vpc_security_group_ids              = [aws_security_group.rds.id]
 
   serverlessv2_scaling_configuration {
@@ -105,5 +105,6 @@ resource "aws_rds_cluster_instance" "this" {
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
   promotion_tier                        = var.promotion_tier
+  publicly_accessible                   = var.publicly_accessible
   tags                                  = merge(local.tags, var.tags)
 }

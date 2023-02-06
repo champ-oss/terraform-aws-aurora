@@ -326,6 +326,12 @@ variable "promotion_tier" {
   default     = 2
 }
 
+variable "publicly_accessible" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#publicly_accessible"
+  type        = string
+  default     = false
+}
+
 variable "replication_source_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#replication_source_identifier"
   type        = string

@@ -1,5 +1,5 @@
 resource "aws_ssm_parameter" "this" {
-  name        = aws_rds_cluster.this.tags["password_ssm_name"]
+  name        = "/${var.git}/mysql/${aws_rds_cluster.this.cluster_identifier}/password"
   description = "mysql password"
   type        = "SecureString"
   value       = random_password.password.result
