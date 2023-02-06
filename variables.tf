@@ -70,12 +70,6 @@ variable "create_kms" {
   default     = true
 }
 
-variable "create_dms_replication_task" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_replication_task"
-  type        = bool
-  default     = false
-}
-
 variable "database_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_name"
   type        = string
