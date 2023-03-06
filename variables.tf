@@ -299,7 +299,7 @@ variable "preferred_backup_window" {
 
 variable "preferred_maintenance_window" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#preferred_maintenance_window"
-  default     = "Sun:07:00-Sun:08:00"
+  default     = "sun:07:00-Sun:07:30"
   type        = string
 }
 
