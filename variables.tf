@@ -144,6 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
+  default     = null
 }
 
 variable "final_snapshot_identifier" {
