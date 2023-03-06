@@ -86,6 +86,7 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       snapshot_identifier,
+      engine_version, # ignore drift for upgrades
     ]
   }
 }
