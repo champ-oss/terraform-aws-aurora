@@ -86,7 +86,6 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       snapshot_identifier,
-      engine_version, # ignore drift for upgrades
     ]
   }
 }
@@ -107,5 +106,6 @@ resource "aws_rds_cluster_instance" "this" {
   performance_insights_retention_period = var.performance_insights_retention_period
   promotion_tier                        = var.promotion_tier
   publicly_accessible                   = var.publicly_accessible
+  preferred_maintenance_window          = var.preferred_maintenance_window
   tags                                  = merge(local.tags, var.tags)
 }

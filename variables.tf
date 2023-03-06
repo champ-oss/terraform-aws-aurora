@@ -144,7 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "8.0.mysql_aurora.3.02.1"
+  default     = null
 }
 
 variable "final_snapshot_identifier" {
@@ -299,7 +299,7 @@ variable "preferred_backup_window" {
 
 variable "preferred_maintenance_window" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#preferred_maintenance_window"
-  default     = "Sun:07:00-Sun:08:00"
+  default     = "sun:07:00-Sun:07:30"
   type        = string
 }
 
