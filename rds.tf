@@ -86,6 +86,7 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       snapshot_identifier,
+      engine_version,
     ]
   }
 }
@@ -108,4 +109,9 @@ resource "aws_rds_cluster_instance" "this" {
   publicly_accessible                   = var.publicly_accessible
   preferred_maintenance_window          = var.preferred_maintenance_window
   tags                                  = merge(local.tags, var.tags)
+  lifecycle {
+    ignore_changes = [
+      engine_version,
+    ]
+  }
 }
