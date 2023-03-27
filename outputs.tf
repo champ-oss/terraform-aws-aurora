@@ -24,6 +24,7 @@ output "database_name" {
 }
 
 output "endpoint" {
+  depends_on  = [aws_rds_cluster_instance.this]
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#endpoint"
   value       = aws_rds_cluster.this.endpoint
 }
@@ -55,6 +56,7 @@ output "port" {
 }
 
 output "reader_endpoint" {
+  depends_on  = [aws_rds_cluster_instance.this]
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#reader_endpoint"
   value       = aws_rds_cluster.this.reader_endpoint
 }
