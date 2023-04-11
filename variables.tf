@@ -159,18 +159,6 @@ variable "iam_database_authentication_enabled" {
   type        = bool
 }
 
-variable "iam_auth_docker_tag" {
-  description = "Docker tag of IAM Auth code to deploy"
-  type        = string
-  default     = "a5f43f9c4ab5d1b0be4923f58bff799e53d38753"
-}
-
-variable "iam_auth_lambda_enabled" {
-  description = "enable or disable the lambda for setting up iam auth"
-  default     = false
-  type        = bool
-}
-
 variable "iam_roles" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#iam_roles"
   type        = list(string)
@@ -253,18 +241,6 @@ variable "monitoring_interval" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#monitoring_interval"
   type        = number
   default     = 60
-}
-
-variable "mysql_iam_read_username" {
-  description = "read only user to be created via lambda function"
-  type        = string
-  default     = "db_iam_read"
-}
-
-variable "mysql_iam_admin_username" {
-  description = "admin user to be created via lambda function"
-  type        = string
-  default     = "db_iam_admin"
 }
 
 variable "network_type" {

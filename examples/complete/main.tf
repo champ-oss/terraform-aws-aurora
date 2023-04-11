@@ -37,7 +37,6 @@ module "this" {
   cluster_identifier_prefix           = var.git
   cluster_instance_count              = 3
   iam_database_authentication_enabled = true
-  iam_auth_lambda_enabled             = true
   private_subnet_ids                  = data.aws_subnets.this.ids
   protect                             = false
   skip_final_snapshot                 = true
