@@ -177,6 +177,12 @@ variable "kms_key_id" {
   default     = null
 }
 
+variable "master_user_secret_kms_key_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#master_user_secret_kms_key_id"
+  type        = string
+  default     = null
+}
+
 variable "git" {
   description = "Name of the Git repo"
   type        = string

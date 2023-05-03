@@ -48,9 +48,10 @@ resource "aws_rds_cluster" "this" {
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   iam_roles                           = var.iam_roles
   iops                                = var.iops
-  kms_key_id                          = var.kms_key_id != null ? var.kms_key_id : module.kms[0].arn
+  kms_key_id                          = var.create_kms ? module.kms[0].arn : var.kms_key_id
   master_username                     = var.master_username
   master_password                     = random_password.password.result
+  master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
   network_type                        = var.network_type
   port                                = var.port
   preferred_backup_window             = var.preferred_backup_window
