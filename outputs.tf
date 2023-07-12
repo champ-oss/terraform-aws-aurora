@@ -65,3 +65,13 @@ output "security_group_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#id"
   value       = aws_security_group.rds.id
 }
+
+output "glue_connection_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#arn"
+  value       = aws_glue_connection.this[0].arn
+}
+
+output "glue_connection_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#id"
+  value       = aws_glue_connection.this[0].id
+}
