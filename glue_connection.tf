@@ -1,6 +1,6 @@
 resource "aws_glue_connection" "this" {
   count = var.enable_glue_connection ? 1 : 0
-  name  = "${var.glue_name}-${random_string.identifier.result}"
+  name  = "${var.name}-${random_string.identifier.result}"
   connection_properties = {
     JDBC_CONNECTION_URL = "jdbc:mysql://${aws_rds_cluster.this.endpoint}/${aws_rds_cluster.this.database_name}"
     PASSWORD            = aws_rds_cluster.this.master_password

@@ -396,10 +396,10 @@ variable "enable_glue_connection" {
   default     = false
 }
 
-variable "glue_name" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#name"
-
+variable "name" {
+  description = "name var"
+  type        = string
+  default     = "glue"
 }
-
 
 
