@@ -384,5 +384,22 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "security_group_id_list" {
+  type        = string
+  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#security_group_id_list"
+  default     = ""
+}
+
+variable "enable_glue_connection" {
+  description = "enable glue connection for rds"
+  type        = bool
+  default     = false
+}
+
+variable "glue_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#name"
+
+}
+
 
 
