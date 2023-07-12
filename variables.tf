@@ -384,10 +384,10 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "security_group_id_list" {
-  type        = string
-  description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#security_group_id_list"
-  default     = ""
+variable "physical_connection" {
+  description = "physical_connection for glue"
+  type        = map(any)
+  default     = {}
 }
 
 variable "enable_glue_connection" {
@@ -401,5 +401,7 @@ variable "name" {
   type        = string
   default     = "glue"
 }
+
+
 
 
