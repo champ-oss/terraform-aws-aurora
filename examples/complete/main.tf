@@ -43,5 +43,4 @@ module "this" {
   source_security_group_id            = aws_security_group.test.id
   vpc_id                              = data.aws_vpcs.this.ids[0]
   publicly_accessible                 = true
-  enable_glue_connection              = true
 }
