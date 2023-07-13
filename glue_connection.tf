@@ -9,8 +9,7 @@ resource "aws_glue_connection" "this" {
   }
 
   physical_connection_requirements {
-    security_group_id_list = var.glue_security_group
+    security_group_id_list = aws_security_group.this[0].id
     subnet_id              = element(aws_db_subnet_group.this.subnet_ids, 0)
   }
 }
-
