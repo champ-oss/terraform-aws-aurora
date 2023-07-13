@@ -46,6 +46,6 @@ resource "aws_security_group_rule" "glue" {
   from_port                = aws_rds_cluster.this.port
   to_port                  = aws_rds_cluster.this.port
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.glue.id
+  security_group_id        = aws_security_group.glue[0].id
   source_security_group_id = var.source_security_group_id
 }
