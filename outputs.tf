@@ -68,10 +68,10 @@ output "security_group_id" {
 
 output "glue_connection_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#arn"
-  value       = aws_glue_connection.this[0].arn
+  value       = var.enable_glue_connection ? aws_glue_connection.this[0].arn : null
 }
 
 output "glue_connection_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/5.7.0/docs/resources/glue_connection#id"
-  value       = aws_glue_connection.this[0].id
+  value       = var.enable_glue_connection ? aws_glue_connection.this[0].id : null
 }

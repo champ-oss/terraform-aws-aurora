@@ -1,19 +1,16 @@
 resource "aws_glue_connection" "this" {
   count = var.enable_glue_connection ? 1 : 0
-  name  = "${var.name}-${random_string.identifier.result}"
+  name  = aws_rds_cluster.this.cluster_identifier
   tags  = merge(local.tags, var.tags)
   connection_properties = {
-    JDBC_CONNECTION_URL = "jdbc:mysql://${aws_rds_cluster.this.endpoint}/${aws_rds_cluster.this.database_name}"
-    PASSWORD            = aws_secretsmanager_secret_version.this[0].secret_string
+    JDBC_CONNECTION_URL = "jdbc:mysql://${aws_rds_cluster.this.endpoint}:${aws_rds_cluster.this.port}/${aws_rds_cluster.this.database_name}"
+    PASSWORD            = aws_rds_cluster.this.master_password
     USERNAME            = aws_rds_cluster.this.master_username
   }
 
-  dynamic "physical_connection_requirements" {
-    for_each = var.physical_connection
-    content {
-      security_group_id_list = physical_connection.value.security_group_id_list
-      subnet_id              = physical_connection.value.subnet_id
-    }
+  physical_connection_requirements {
+    security_group_id_list = var.glue_security_group
+    subnet_id              = element(aws_db_subnet_group.this.subnet_ids, 1)
   }
 }
 
