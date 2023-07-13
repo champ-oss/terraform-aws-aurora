@@ -10,7 +10,7 @@ resource "aws_glue_connection" "this" {
 
   physical_connection_requirements {
     security_group_id_list = var.glue_security_group
-    subnet_id              = element(aws_db_subnet_group.this.subnet_ids, 1)
+    subnet_id              = element(aws_db_subnet_group.this.subnet_ids, 0)
   }
 }
 
