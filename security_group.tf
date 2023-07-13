@@ -40,12 +40,12 @@ resource "aws_security_group" "glue" {
 }
 
 resource "aws_security_group_rule" "glue" {
-  count             = var.enable_glue_connection ? 1 : 0
-  description       = "ingress from cidr blocks"
-  type              = "ingress"
-  from_port         = aws_rds_cluster.this.port
-  to_port           = aws_rds_cluster.this.port
-  protocol          = "tcp"
-  security_group_id = aws_security_group.glue.id
-  cidr_blocks       = var.cidr_blocks
+  count                    = var.enable_glue_connection ? 1 : 0
+  description              = "ingress from security group"
+  type                     = "ingress"
+  from_port                = aws_rds_cluster.this.port
+  to_port                  = aws_rds_cluster.this.port
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.glue.id
+  source_security_group_id = var.source_security_group_id
 }
