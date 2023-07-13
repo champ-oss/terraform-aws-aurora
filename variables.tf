@@ -384,5 +384,8 @@ variable "vpc_id" {
   type        = string
 }
 
-
-
+variable "enable_glue_connection" {
+  description = "enable glue connection for rds"
+  type        = bool
+  default     = false
+}
