@@ -2,7 +2,7 @@ data "aws_availability_zones" "available" {}
 
 resource "aws_glue_connection" "this" {
   count = var.enable_glue_connection ? 1 : 0
-  name  = aws_rds_cluster.this.cluster_identifier_prefix
+  name  = aws_rds_cluster.this.cluster_identifier
   tags  = merge(local.tags, var.tags)
   connection_properties = {
     JDBC_CONNECTION_URL = "jdbc:mysql://${aws_rds_cluster.this.endpoint}:${aws_rds_cluster.this.port}/${aws_rds_cluster.this.database_name}"
