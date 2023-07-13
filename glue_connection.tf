@@ -11,7 +11,7 @@ resource "aws_glue_connection" "this" {
   }
 
   physical_connection_requirements {
-    availability_zone      = element(aws_rds_cluster.this.availability_zones, 0)
+    availability_zone      = sort(aws_rds_cluster.this.availability_zones)[0]
     security_group_id_list = [aws_security_group.glue[0].id]
     subnet_id              = element(var.private_subnet_ids, 0)
   }
