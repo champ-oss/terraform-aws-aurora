@@ -78,11 +78,11 @@ output "glue_connection_id" {
 
 output "dms_endpoint_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
-  value       = var.create_dms_endpoint ? aws_dms_endpoint.this.endpoint_id : null
+  value       = var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_id : null
 }
 
 output "dms_endpoint_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
-  value       = var.create_dms_endpoint ? aws_dms_endpoint.this.endpoint_arn : null
+  value       = var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_arn : null
 }
 
