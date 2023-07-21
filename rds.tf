@@ -29,7 +29,7 @@ resource "aws_rds_cluster" "this" {
   availability_zones                  = var.availability_zones
   backtrack_window                    = var.backtrack_window
   backup_retention_period             = var.backup_retention_period
-  cluster_identifier_prefix           = "${var.cluster_identifier_prefix}-"
+  cluster_identifier_prefix           = "${substr(var.cluster_identifier_prefix, 0, 33)}-" # 60 max length with 27 char random suffix
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   database_name                       = var.database_name
   db_cluster_instance_class           = var.db_cluster_instance_class
@@ -87,6 +87,7 @@ resource "aws_rds_cluster" "this" {
       final_snapshot_identifier,
       snapshot_identifier,
       engine_version,
+      cluster_identifier_prefix
     ]
   }
 }
@@ -99,7 +100,7 @@ resource "aws_rds_cluster_instance" "this" {
   copy_tags_to_snapshot                 = var.copy_tags_to_snapshot
   engine                                = aws_rds_cluster.this.engine
   engine_version                        = aws_rds_cluster.this.engine_version
-  identifier_prefix                     = "${var.cluster_identifier_prefix}-"
+  identifier_prefix                     = "${substr(var.cluster_identifier_prefix, 0, 33)}-" # 60 max length with 27 char random suffix
   instance_class                        = var.instance_class
   monitoring_role_arn                   = aws_iam_role.rds_enhanced_monitoring.arn
   monitoring_interval                   = var.monitoring_interval
@@ -112,6 +113,7 @@ resource "aws_rds_cluster_instance" "this" {
   lifecycle {
     ignore_changes = [
       engine_version,
+      identifier_prefix
     ]
   }
 }
