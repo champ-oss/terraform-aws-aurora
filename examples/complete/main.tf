@@ -34,7 +34,7 @@ resource "aws_security_group" "test" {
 module "this" {
   source                              = "../../"
   backup_retention_period             = 1
-  cluster_identifier_prefix           = "${var.git}-test-aurora-cluster"
+  cluster_identifier_prefix           = "${var.git}-mysql-aurora-cluster"
   cluster_instance_count              = 3
   iam_database_authentication_enabled = true
   private_subnet_ids                  = data.aws_subnets.this.ids
