@@ -1,13 +1,3 @@
-terraform {
-  backend "s3" {}
-}
-
-provider "aws" {
-  region = "us-east-2"
-}
-
-data "aws_region" "current" {}
-
 data "aws_vpcs" "this" {
   tags = {
     purpose = "vega"
@@ -34,8 +24,8 @@ resource "aws_security_group" "test" {
 module "this" {
   source                              = "../../"
   backup_retention_period             = 1
-  cluster_identifier_prefix           = "${var.git}-mysql-test1-cluster"
-  cluster_instance_count              = 3
+  cluster_identifier_prefix           = "terraform-aws-aurora-mysql-test1-cluster"
+  cluster_instance_count              = 1
   iam_database_authentication_enabled = true
   private_subnet_ids                  = data.aws_subnets.this.ids
   protect                             = false
