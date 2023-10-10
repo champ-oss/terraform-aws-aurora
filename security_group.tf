@@ -57,8 +57,8 @@ resource "aws_security_group_rule" "glue_ingress_self" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.glue.id
-  source_security_group_id = aws_security_group.glue.id
+  security_group_id        = aws_security_group.glue[0].id
+  source_security_group_id = aws_security_group.glue[0].id
 }
 
 resource "aws_security_group_rule" "glue_egress_self" {
@@ -68,7 +68,7 @@ resource "aws_security_group_rule" "glue_egress_self" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.glue.id
-  source_security_group_id = aws_security_group.glue.id
+  security_group_id        = aws_security_group.glue[0].id
+  source_security_group_id = aws_security_group.glue[0].id
 }
 
