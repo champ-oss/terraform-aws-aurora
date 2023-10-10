@@ -49,3 +49,26 @@ resource "aws_security_group_rule" "glue" {
   security_group_id        = aws_security_group.glue[0].id
   source_security_group_id = var.source_security_group_id
 }
+
+resource "aws_security_group_rule" "glue_ingress_self" {
+  count                    = var.enable_glue_connection ? 1 : 0
+  description              = "ingress self reference"
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 65535
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.glue.id
+  source_security_group_id = aws_security_group.glue.id
+}
+
+resource "aws_security_group_rule" "glue_egress_self" {
+  count                    = var.enable_glue_connection ? 1 : 0
+  description              = "egress self reference"
+  type                     = "egress"
+  from_port                = 0
+  to_port                  = 65535
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.glue.id
+  source_security_group_id = aws_security_group.glue.id
+}
+
