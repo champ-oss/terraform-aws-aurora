@@ -72,3 +72,13 @@ resource "aws_security_group_rule" "glue_egress_self" {
   source_security_group_id = aws_security_group.glue[0].id
 }
 
+resource "aws_security_group_rule" "glue_egress_internet" {
+  description       = "egress internet"
+  type              = "egress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "all"
+  security_group_id = aws_security_group.glue[0].id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
