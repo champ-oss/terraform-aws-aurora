@@ -401,3 +401,21 @@ variable "dms_endpoint_type" {
   type        = string
   default     = "target"
 }
+
+variable "enable_s3_export" {
+  description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html"
+  type        = bool
+  default     = false
+}
+
+variable "s3_export_schedule_expression" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/scheduler_schedule#schedule_expression"
+  type        = string
+  default     = "cron(0 5 * * ? *)"
+}
+
+variable "s3_export_maximum_window_in_minutes" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/scheduler_schedule#flexible_time_window"
+  type        = number
+  default     = 15
+}
