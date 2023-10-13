@@ -1,6 +1,6 @@
 module "eventbridge_s3_export" {
   count        = var.enable_s3_export ? 1 : 0
-  source       = "github.com/champ-oss/terraform-aws-eventbridge.git?ref=deaad4c674966d91c759f1d88e69070ff44b9439"
+  source       = "github.com/champ-oss/terraform-aws-eventbridge.git?ref=v1.0.2-b5d961e"
   git          = "${substr(local.cluster_identifier_prefix, 0, 28)}s3-export"
   service_name = "rds"
   api_action   = "startExportTask"
