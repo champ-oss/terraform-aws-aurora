@@ -14,6 +14,4 @@ module "eventbridge_s3_export" {
   }
   schedule_expression       = var.s3_export_schedule_expression
   maximum_window_in_minutes = var.s3_export_maximum_window_in_minutes
-  protect                   = var.protect
-  tags                      = merge(local.tags, var.tags)
 }
