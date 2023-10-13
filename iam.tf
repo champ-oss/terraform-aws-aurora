@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "rds_enhanced_monitoring" {
 }
 
 resource "aws_iam_role" "this" {
-  name_prefix        = "${var.git}-${local.cluster_identifier_prefix}-"
+  name_prefix        = substr("${local.cluster_identifier_prefix}-", 0, 38)
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   tags               = merge(local.tags, var.tags)
 }
@@ -46,7 +46,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 }
 
 resource "aws_iam_policy" "this" {
-  name_prefix = var.git
+  name_prefix = substr("${local.cluster_identifier_prefix}-", 0, 60)
   policy      = data.aws_iam_policy_document.this.json
 }
 
