@@ -57,21 +57,31 @@ resource "aws_iam_policy" "this" {
 data "aws_iam_policy_document" "this" {
   count = var.create_iam_role ? 1 : 0
   statement {
-    actions = [
-      "iam:PassRole",
-      "rds:StartExportTask",
-      "s3:GetBucketLocation"
-    ]
+    actions   = ["iam:PassRole"]
     resources = ["*"]
   }
 
   statement {
-    actions   = ["kms:*"]
+    actions   = ["rds:StartExportTask"]
+    resources = [aws_rds_cluster.this.arn]
+  }
+
+  statement {
+    actions = [
+      "kms:Encrypt*",
+      "kms:Decrypt*",
+      "kms:Describe*",
+      "kms:Generate*",
+      "kms:Get*",
+    ]
     resources = [module.kms[0].arn]
   }
 
   statement {
-    actions   = ["s3:*"]
-    resources = ["arn:aws:s3:::${module.s3[0].bucket}/*"]
+    actions = ["s3:*"]
+    resources = [
+      "arn:aws:s3:::${module.s3[0].bucket}",
+      "arn:aws:s3:::${module.s3[0].bucket}/*"
+    ]
   }
 }
