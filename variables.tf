@@ -162,7 +162,7 @@ variable "iam_database_authentication_enabled" {
 variable "iam_roles" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#iam_roles"
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "instance_class" {
