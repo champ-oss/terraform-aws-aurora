@@ -6,7 +6,7 @@ module "eventbridge_s3_export" {
   api_action   = "startExportTask"
   role_arn     = aws_iam_role.this.arn
   input_parameters = {
-    ExportTaskIdentifier : substr("${local.cluster_identifier_prefix}-<aws.scheduler.execution-id>", 0, 60),
+    ExportTaskIdentifier : "<aws.scheduler.execution-id>"
     IamRoleArn : aws_iam_role.this.arn,
     KmsKeyId : module.kms[0].key_id,
     S3BucketName : module.s3.bucket,
