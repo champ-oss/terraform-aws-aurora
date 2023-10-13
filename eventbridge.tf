@@ -4,12 +4,12 @@ module "eventbridge_s3_export" {
   git          = "${substr(local.cluster_identifier_prefix, 0, 28)}s3-export"
   service_name = "rds"
   api_action   = "startExportTask"
-  role_arn     = aws_iam_role.this.arn
+  role_arn     = aws_iam_role.this[0].arn
   input_parameters = {
     ExportTaskIdentifier : "<aws.scheduler.execution-id>"
-    IamRoleArn : aws_iam_role.this.arn,
+    IamRoleArn : aws_iam_role.this[0].arn,
     KmsKeyId : module.kms[0].key_id,
-    S3BucketName : module.s3.bucket,
+    S3BucketName : module.s3[0].bucket,
     SourceArn : aws_rds_cluster.this.arn
   }
   schedule_expression       = var.s3_export_schedule_expression

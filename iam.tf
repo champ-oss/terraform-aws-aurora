@@ -20,12 +20,14 @@ data "aws_iam_policy_document" "rds_enhanced_monitoring" {
 }
 
 resource "aws_iam_role" "this" {
+  count              = var.create_iam_role ? 1 : 0
   name_prefix        = substr("${local.cluster_identifier_prefix}-", 0, 38)
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role[0].json
   tags               = merge(local.tags, var.tags)
 }
 
 data "aws_iam_policy_document" "assume_role" {
+  count = var.create_iam_role ? 1 : 0
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -41,16 +43,19 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  policy_arn = aws_iam_policy.this.arn
-  role       = aws_iam_role.this.name
+  count      = var.create_iam_role ? 1 : 0
+  policy_arn = aws_iam_policy.this[0].arn
+  role       = aws_iam_role.this[0].name
 }
 
 resource "aws_iam_policy" "this" {
+  count       = var.create_iam_role ? 1 : 0
   name_prefix = substr("${local.cluster_identifier_prefix}-", 0, 60)
-  policy      = data.aws_iam_policy_document.this.json
+  policy      = data.aws_iam_policy_document.this[0].json
 }
 
 data "aws_iam_policy_document" "this" {
+  count = var.create_iam_role ? 1 : 0
   statement {
     actions = [
       "iam:PassRole",
@@ -66,6 +71,6 @@ data "aws_iam_policy_document" "this" {
 
   statement {
     actions   = ["s3:*"]
-    resources = ["arn:aws:s3:::${module.s3.bucket}/*"]
+    resources = ["arn:aws:s3:::${module.s3[0].bucket}/*"]
   }
 }

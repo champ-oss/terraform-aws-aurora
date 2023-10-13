@@ -36,6 +36,8 @@ module "this" {
   enable_glue_connection              = true
   create_dms_endpoint                 = true
   dms_endpoint_type                   = "source"
+  create_iam_role                     = true
+  create_s3                           = true
   enable_s3_export                    = true
   s3_export_schedule_expression       = "rate(2 hours)"
 }

@@ -46,7 +46,7 @@ resource "aws_rds_cluster" "this" {
   final_snapshot_identifier           = var.final_snapshot_identifier != null ? var.final_snapshot_identifier : local.snapshot_timestamp
   global_cluster_identifier           = var.global_cluster_identifier
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  iam_roles                           = concat([aws_iam_role.this.arn], var.iam_roles)
+  iam_roles                           = var.create_iam_role ? concat([aws_iam_role.this[0].arn], var.iam_roles) : var.iam_roles
   iops                                = var.iops
   kms_key_id                          = var.create_kms ? module.kms[0].arn : var.kms_key_id
   master_username                     = var.master_username

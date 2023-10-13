@@ -402,6 +402,18 @@ variable "dms_endpoint_type" {
   default     = "target"
 }
 
+variable "create_iam_role" {
+  description = "Create an IAM role and attach to the RDS cluster"
+  type        = bool
+  default     = false
+}
+
+variable "create_s3" {
+  description = "Create an S3 bucket"
+  type        = bool
+  default     = false
+}
+
 variable "enable_s3_export" {
   description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html"
   type        = bool
