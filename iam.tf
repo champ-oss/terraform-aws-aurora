@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "this" {
 
   statement {
     actions   = ["kms:*"]
-    resources = [module.kms.arn]
+    resources = [module.kms[0].arn]
   }
 
   statement {

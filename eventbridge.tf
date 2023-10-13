@@ -8,7 +8,7 @@ module "eventbridge_s3_export" {
   input_parameters = {
     ExportTaskIdentifier : substr("${var.git}-${local.cluster_identifier_prefix}", 0, 60),
     IamRoleArn : aws_iam_role.this.arn,
-    KmsKeyId : module.kms.key_id,
+    KmsKeyId : module.kms[0].key_id,
     S3BucketName : module.s3.bucket,
     SourceArn : aws_rds_cluster.this.arn
   }
