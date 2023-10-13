@@ -3,7 +3,7 @@ module "eventbridge_s3_export" {
   source       = "github.com/champ-oss/terraform-aws-eventbridge.git?ref=v1.0.1-1ce59ef"
   git          = "${substr(local.cluster_identifier_prefix, 0, 28)}s3-export"
   service_name = "rds"
-  api_action   = "startexporttask"
+  api_action   = "startExportTask"
   role_arn     = aws_iam_role.this.arn
   input_parameters = {
     ExportTaskIdentifier : substr("${local.cluster_identifier_prefix}-<aws.scheduler.execution-id>", 0, 60),
