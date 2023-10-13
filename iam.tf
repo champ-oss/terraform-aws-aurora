@@ -59,7 +59,8 @@ data "aws_iam_policy_document" "this" {
   statement {
     actions = [
       "iam:PassRole",
-      "rds:StartExportTask"
+      "rds:StartExportTask",
+      "s3:GetBucketLocation"
     ]
     resources = ["*"]
   }
