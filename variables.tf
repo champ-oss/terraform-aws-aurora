@@ -162,7 +162,7 @@ variable "iam_database_authentication_enabled" {
 variable "iam_roles" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#iam_roles"
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "instance_class" {
@@ -400,4 +400,34 @@ variable "dms_endpoint_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
   type        = string
   default     = "target"
+}
+
+variable "create_iam_role" {
+  description = "Create an IAM role and attach to the RDS cluster"
+  type        = bool
+  default     = false
+}
+
+variable "create_s3" {
+  description = "Create an S3 bucket"
+  type        = bool
+  default     = false
+}
+
+variable "enable_s3_export" {
+  description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html"
+  type        = bool
+  default     = false
+}
+
+variable "s3_export_schedule_expression" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/scheduler_schedule#schedule_expression"
+  type        = string
+  default     = "cron(0 5 * * ? *)"
+}
+
+variable "s3_export_maximum_window_in_minutes" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/scheduler_schedule#flexible_time_window"
+  type        = number
+  default     = 15
 }
