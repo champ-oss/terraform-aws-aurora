@@ -222,7 +222,7 @@ variable "metric_alarms_enabled" {
 variable "metric_evaluation_periods" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#evaluation_periods"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "metric_period" {
