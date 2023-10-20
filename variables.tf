@@ -263,6 +263,7 @@ variable "metric_treat_missing_data" {
 
 variable "metric_ok_actions_enabled" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#ok_actions"
+  type        = bool
   default     = false
 }
 
