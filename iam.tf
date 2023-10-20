@@ -68,6 +68,7 @@ data "aws_iam_policy_document" "this" {
 
   statement {
     actions = [
+      "kms:Create*",
       "kms:Encrypt*",
       "kms:Decrypt*",
       "kms:Describe*",
