@@ -40,4 +40,5 @@ module "this" {
   create_s3                           = true
   enable_s3_export                    = true
   s3_export_schedule_expression       = "rate(2 hours)"
+  metric_alarms_enabled               = true
 }

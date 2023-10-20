@@ -222,19 +222,48 @@ variable "metric_alarms_enabled" {
 variable "metric_evaluation_periods" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#evaluation_periods"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "metric_period" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#period"
   type        = number
-  default     = 300 # in seconds
+  default     = 86400 # in seconds
 }
 
-variable "metric_threshold_acu_utilization" {
+variable "metric_threshold" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
   type        = number
-  default     = 75
+  default     = 115
+}
+
+variable "metric_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#metric_name"
+  type        = string
+  default     = "ServerlessDatabaseCapacity"
+}
+
+variable "metric_statistic" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#statistic"
+  type        = string
+  default     = "Maximum"
+}
+
+variable "metric_comparison_operator" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#comparison_operator"
+  type        = string
+  default     = "GreaterThanOrEqualToThreshold"
+}
+
+variable "metric_treat_missing_data" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#treat_missing_data"
+  type        = string
+  default     = "notBreaching"
+}
+
+variable "metric_ok_actions_enabled" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#ok_actions"
+  default     = false
 }
 
 variable "monitoring_interval" {

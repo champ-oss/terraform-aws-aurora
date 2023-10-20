@@ -1,18 +1,19 @@
-resource "aws_cloudwatch_metric_alarm" "acu_utilization" {
+resource "aws_cloudwatch_metric_alarm" "this" {
   count               = var.metric_alarms_enabled ? 1 : 0
-  alarm_name          = "${aws_rds_cluster.this.cluster_identifier}-ACUUtilization"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_name          = "${aws_rds_cluster.this.cluster_identifier}-${var.metric_name}"
+  comparison_operator = var.metric_comparison_operator
   evaluation_periods  = var.metric_evaluation_periods
-  metric_name         = "ACUUtilization"
+  metric_name         = var.metric_name
   namespace           = "AWS/RDS"
   period              = var.metric_period
-  statistic           = "Average"
-  threshold           = var.metric_threshold_acu_utilization
+  statistic           = var.metric_statistic
+  threshold           = var.metric_threshold
   alarm_actions       = [aws_sns_topic.this.arn]
-  ok_actions          = [aws_sns_topic.this.arn]
+  ok_actions          = var.metric_ok_actions_enabled ? [aws_sns_topic.this.arn] : []
+  treat_missing_data  = var.metric_treat_missing_data
+  tags                = merge(local.tags, var.tags)
 
   dimensions = {
     DBClusterIdentifier = aws_rds_cluster.this.cluster_identifier
   }
-  tags = merge(local.tags, var.tags)
 }
