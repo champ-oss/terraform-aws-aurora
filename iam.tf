@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "this" {
 
   statement {
     actions = [
-      "kms:CreateGrant*",
+      "kms:Create*",
       "kms:Encrypt*",
       "kms:Decrypt*",
       "kms:Describe*",
