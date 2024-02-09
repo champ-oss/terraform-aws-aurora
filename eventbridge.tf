@@ -10,7 +10,8 @@ module "eventbridge_s3_export" {
     IamRoleArn : aws_iam_role.this[0].arn,
     KmsKeyId : module.kms[0].key_id,
     S3BucketName : module.s3[0].bucket,
-    SourceArn : aws_rds_cluster.this.arn
+    SourceArn : aws_rds_cluster.this.arn,
+    S3Prefix : local.cluster_identifier_prefix
   }
   schedule_expression       = var.s3_export_schedule_expression
   maximum_window_in_minutes = var.s3_export_maximum_window_in_minutes
