@@ -8,6 +8,7 @@ resource "aws_ssm_parameter" "this" {
     port               = aws_rds_cluster.this.port
     endpoint           = aws_rds_cluster.this.endpoint
     cluster_identifier = aws_rds_cluster.this.cluster_identifier
+    read_only_endpoint = aws_rds_cluster.this.reader_endpoint
   }, local.tags, var.tags)
 
   lifecycle {
