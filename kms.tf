@@ -1,6 +1,6 @@
 module "kms" {
   count                   = var.create_kms ? 1 : 0
-  source                  = "github.com/champ-oss/terraform-aws-kms.git?ref=v1.0.32-a3f9aff"
+  source                  = "github.com/champ-oss/terraform-aws-kms.git?ref=v1.0.33-cb3be31"
   git                     = var.git
   name                    = "alias/${var.cluster_identifier_prefix}"
   deletion_window_in_days = var.deletion_window_in_days
