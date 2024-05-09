@@ -19,7 +19,7 @@ resource "aws_db_subnet_group" "this" {
   tags        = merge(local.tags, var.tags)
 
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [name_prefix]
   }
 }
 
