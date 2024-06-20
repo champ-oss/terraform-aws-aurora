@@ -356,6 +356,12 @@ variable "shared_accounts" {
   default     = []
 }
 
+variable "dms_shared_ssm_accounts" {
+  description = "AWS accounts to share the DMS SSM parameter"
+  type        = list(string)
+  default     = []
+}
+
 variable "skip_final_snapshot" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
   default     = false
