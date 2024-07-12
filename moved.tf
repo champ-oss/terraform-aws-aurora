@@ -57,3 +57,8 @@ moved {
   from = aws_ssm_parameter.this
   to   = aws_ssm_parameter.this[0]
 }
+
+moved {
+  from = module.eventbridge_s3_export[0].aws_scheduler_schedule.universal_target
+  to   = aws_scheduler_schedule.universal_target[0]
+}
