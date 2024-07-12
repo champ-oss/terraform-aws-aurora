@@ -1,7 +1,7 @@
 resource "aws_iam_role" "rds_enhanced_monitoring" {
   count              = var.enabled ? 1 : 0
   name_prefix        = "rds-enhanced-monitoring-"
-  assume_role_policy = data.aws_iam_policy_document.rds_enhanced_monitoring.json
+  assume_role_policy = data.aws_iam_policy_document.rds_enhanced_monitoring[0].json
   tags               = merge(local.tags, var.tags)
 }
 
