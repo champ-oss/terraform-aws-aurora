@@ -1,16 +1,3 @@
-locals {
-  # https://github.com/hashicorp/terraform/pull/18871
-  input_parameters = replace(replace(jsonencode({
-    ExportTaskIdentifier : "${substr(local.cluster_identifier_prefix, 0, 22)}-<aws.scheduler.execution-id>",
-    IamRoleArn : aws_iam_role.this[0].arn,
-    KmsKeyId : module.kms[0].key_id,
-    S3BucketName : module.s3[0].bucket,
-    SourceArn : aws_rds_cluster.this[0].arn
-    }),
-    "\\u003e", ">"),
-  "\\u003c", "<")
-}
-
 resource "aws_scheduler_schedule" "universal_target" {
   count = var.enabled && var.enable_s3_export ? 1 : 0
 
@@ -27,6 +14,14 @@ resource "aws_scheduler_schedule" "universal_target" {
   target {
     arn      = "arn:aws:scheduler:::aws-sdk:rds:startExportTask"
     role_arn = aws_iam_role.this[0].arn
-    input    = local.input_parameters
+    input    = replace(replace(jsonencode({
+      ExportTaskIdentifier : "${substr(local.cluster_identifier_prefix, 0, 22)}-<aws.scheduler.execution-id>",
+      IamRoleArn : aws_iam_role.this[0].arn,
+      KmsKeyId : module.kms[0].key_id,
+      S3BucketName : module.s3[0].bucket,
+      SourceArn : aws_rds_cluster.this[0].arn
+    }),
+      "\\u003e", ">"),
+      "\\u003c", "<")
   }
 }
