@@ -465,6 +465,6 @@ variable "s3_export_maximum_window_in_minutes" {
 variable "enabled" {
   description = "Set to false to prevent the module from creating any resources"
   type        = bool
-  default     = false
+  default     = true
 }
 
