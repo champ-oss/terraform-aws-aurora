@@ -5,11 +5,10 @@ resource "aws_scheduler_schedule" "universal_target" {
   state       = "ENABLED"
   flexible_time_window {
     mode                      = "FLEXIBLE"
-    maximum_window_in_minutes = 15
+    maximum_window_in_minutes = var.s3_export_maximum_window_in_minutes
   }
 
   schedule_expression          = var.s3_export_schedule_expression
-  schedule_expression_timezone = var.s3_export_maximum_window_in_minutes
 
   target {
     arn      = "arn:aws:scheduler:::aws-sdk:rds:startExportTask"
