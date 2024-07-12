@@ -5,7 +5,7 @@ locals {
     IamRoleArn : aws_iam_role.this[0].arn,
     KmsKeyId : module.kms[0].key_id,
     S3BucketName : module.s3[0].bucket,
-    SourceArn : aws_rds_cluster.this.arn
+    SourceArn : aws_rds_cluster.this[0].arn
     }),
     "\\u003e", ">"),
   "\\u003c", "<")
