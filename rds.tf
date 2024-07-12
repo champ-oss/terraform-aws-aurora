@@ -111,7 +111,7 @@ moved {
 }
 
 resource "aws_rds_cluster_instance" "this" {
-  count                                 = length(var.cluster_instance_count) > 0 && var.enabled ? var.cluster_instance_count : 0
+  count                                 = var.enabled ? var.cluster_instance_count : 0
   apply_immediately                     = !var.protect
   auto_minor_version_upgrade            = var.auto_minor_version_upgrade
   cluster_identifier                    = aws_rds_cluster.this[0].id
