@@ -52,7 +52,7 @@ output "password_ssm_name" {
 
 output "port" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#port"
-  value       = var.enabled ? aws_rds_cluster.this[0].port : null
+  value       = var.enabled ? aws_rds_cluster.this[0].port : ""
 }
 
 output "reader_endpoint" {
