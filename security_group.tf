@@ -10,7 +10,7 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_security_group_rule" "from_sg" {
-  count                    = var.enabled && var.source_security_group_id != "" ? 1 : 0
+  count                    = var.enabled && var.enable_source_group_security ? 1 : 0
   description              = "ingress from security group"
   type                     = "ingress"
   from_port                = aws_rds_cluster.this[0].port
