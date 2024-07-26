@@ -4,7 +4,8 @@ locals {
 
   # 60 character max length with 27 character random suffix
   cluster_identifier_prefix = trimsuffix(substr(var.cluster_identifier_prefix, 0, 33), "-")
-  source_security_group_id = var.source_security_group_id != null ? var.source_security_group_id : null
+  source_security_group_id = var.source_security_group_id != "" ? var.source_security_group_id : ""
+
   tags = {
     cost    = "aurora"
     creator = "terraform"

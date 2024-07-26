@@ -383,7 +383,7 @@ variable "source_region" {
 variable "source_security_group_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#source_security_group_id"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "storage_type" {
