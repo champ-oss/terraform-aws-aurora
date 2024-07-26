@@ -383,6 +383,7 @@ variable "source_region" {
 variable "source_security_group_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#source_security_group_id"
   type        = string
+  default     = ""
 }
 
 variable "storage_type" {
@@ -464,6 +465,12 @@ variable "s3_export_maximum_window_in_minutes" {
 
 variable "enabled" {
   description = "Set to false to prevent the module from creating any resources"
+  type        = bool
+  default     = true
+}
+
+variable "enable_source_security_group" {
+  description = "Enable source security group"
   type        = bool
   default     = true
 }
