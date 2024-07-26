@@ -469,8 +469,8 @@ variable "enabled" {
   default     = true
 }
 
-variable "enable_source_group_security" {
-  description = "Enable source group security"
+variable "enable_source_security_group" {
+  description = "Enable source security group"
   type        = bool
   default     = true
 }
