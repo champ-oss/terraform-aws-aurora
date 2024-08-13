@@ -492,3 +492,9 @@ variable "source_db_snapshot_identifier" {
   type        = string
   default     = null
 }
+
+variable "custom_db_cluster_snapshot_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_cluster_snapshot#db_cluster_snapshot_identifier"
+  type        = string
+  default     = null
+}
