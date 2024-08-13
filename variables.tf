@@ -481,12 +481,6 @@ variable "enable_db_cluster_snapshot" {
   default     = false
 }
 
-variable "custom_db_cluster_snapshot_identifier" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_cluster_snapshot#db_cluster_snapshot_identifier"
-  type        = string
-  default     = null
-}
-
 variable "shared_accounts_snapshot" {
   description = "AWS accounts to share the RDS cluster snapshot"
   type        = list(string)
