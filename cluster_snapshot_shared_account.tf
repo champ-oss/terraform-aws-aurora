@@ -7,7 +7,7 @@ resource "aws_db_cluster_snapshot" "this" {
 }
 
 resource "aws_db_snapshot_copy" "this" {
-  count                         = var.source_db_snapshot_identifier != null && var.enabled ? 1 : 0
+  count                         = var.source_db_snapshot_identifier != null ? 1 : 0
   source_db_snapshot_identifier = var.source_db_snapshot_identifier
   target_db_snapshot_identifier = substr("${var.source_db_snapshot_identifier}-copy", 0, 63)
   tags                          = merge(local.tags, var.tags)
