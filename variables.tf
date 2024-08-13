@@ -475,13 +475,13 @@ variable "enable_source_security_group" {
   default     = true
 }
 
-variable "enable_snapshot_account_share" {
+variable "enable_db_cluster_snapshot" {
   description = "Enable snapshot account share"
   type        = bool
   default     = false
 }
 
-variable "db_cluster_snapshot_identifier" {
+variable "custom_db_cluster_snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_cluster_snapshot#db_cluster_snapshot_identifier"
   type        = string
   default     = null
