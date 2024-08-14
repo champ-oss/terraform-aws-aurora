@@ -475,3 +475,14 @@ variable "enable_source_security_group" {
   default     = true
 }
 
+variable "enable_shared_snapshot" {
+  description = "Enable snapshot account share"
+  type        = bool
+  default     = false
+}
+
+variable "shared_accounts_snapshot" {
+  description = "AWS accounts to share the RDS cluster snapshot"
+  type        = list(string)
+  default     = []
+}
