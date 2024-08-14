@@ -488,7 +488,7 @@ variable "shared_accounts_snapshot" {
 }
 
 variable "db_cluster_snapshot_identifier" {
-    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_snapshot#db_cluster_snapshot_identifier"
-    type        = string
-    default     = null
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_snapshot#db_cluster_snapshot_identifier"
+  type        = string
+  default     = null
 }
