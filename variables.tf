@@ -115,7 +115,7 @@ variable "enable_global_write_forwarding" {
 variable "enable_http_endpoint" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#enable_http_endpoint"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "enabled_cloudwatch_logs_exports" {
@@ -144,7 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "8.0.mysql_aurora.3.06.0"
+  default     = "8.0.mysql_aurora.3.07.1"
 }
 
 variable "final_snapshot_identifier" {
