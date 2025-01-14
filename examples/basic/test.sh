@@ -1,5 +1,5 @@
 set -e
 
 
-# sleep for 20 minutes to simulate a long running process
-sleep 1200
+# sleep for 10 minutes to simulate a long running process
+sleep 600

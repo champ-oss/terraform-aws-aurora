@@ -86,3 +86,7 @@ output "dms_endpoint_arn" {
   value       = var.enabled && var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_arn : ""
 }
 
+output "secret_manager_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret#arn"
+  value       = var.enabled && var.enable_secrets_manager ? aws_secretsmanager_secret.this[0].arn : ""
+}
