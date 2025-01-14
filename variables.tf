@@ -144,7 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "8.0.mysql_aurora.3.07.1"
+  default     = "8.0.mysql_aurora.3.08.0"
 }
 
 variable "final_snapshot_identifier" {
