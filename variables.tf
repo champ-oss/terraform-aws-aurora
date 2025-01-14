@@ -504,3 +504,9 @@ variable "seconds_until_auto_pause" {
     type        = number
     default     = 300
 }
+
+variable "timeout_action" {
+    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#timeout_action"
+    type        = string
+    default     = "ForceApplyCapacityChange"
+}
