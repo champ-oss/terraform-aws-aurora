@@ -144,7 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "8.0.mysql_aurora.3.07.1"
+  default     = "8.0.mysql_aurora.3.08.0"
 }
 
 variable "final_snapshot_identifier" {
@@ -491,4 +491,16 @@ variable "db_cluster_snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_snapshot#db_cluster_snapshot_identifier"
   type        = string
   default     = null
+}
+
+variable "auto_pause" {
+    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#auto_pause"
+    type        = bool
+    default     = false
+}
+
+variable "seconds_until_auto_pause" {
+    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
+    type        = number
+    default     = 300
 }
