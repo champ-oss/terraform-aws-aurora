@@ -494,7 +494,7 @@ variable "db_cluster_snapshot_identifier" {
 }
 
 variable "enable_secrests_manager" {
-    description = "Enable AWS Secrets Manager"
-    type        = bool
-    default     = false
+  description = "Enable AWS Secrets Manager"
+  type        = bool
+  default     = false
 }

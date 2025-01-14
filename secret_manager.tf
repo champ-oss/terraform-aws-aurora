@@ -1,6 +1,6 @@
 resource "aws_secretsmanager_secret" "this" {
-  count                               = var.enabled && var.enable_secrests_manager ? 1 : 0
-  name = "/${var.git}/mysql/${aws_rds_cluster.this[0].cluster_identifier}/password"
+  count = var.enabled && var.enable_secrests_manager ? 1 : 0
+  name  = "/${var.git}/mysql/${aws_rds_cluster.this[0].cluster_identifier}/password"
 }
 
 resource "aws_secretsmanager_secret_version" "this" {
