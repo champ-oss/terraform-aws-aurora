@@ -493,14 +493,14 @@ variable "db_cluster_snapshot_identifier" {
   default     = null
 }
 
-variable "auto_pause" {
-    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#auto_pause"
-    type        = bool
-    default     = false
+variable "enable_auto_pause" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#auto_pause"
+  type        = bool
+  default     = false
 }
 
 variable "seconds_until_auto_pause" {
-    description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
-    type        = number
-    default     = 300
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
+  type        = number
+  default     = 300
 }
