@@ -115,7 +115,7 @@ variable "enable_global_write_forwarding" {
 variable "enable_http_endpoint" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#enable_http_endpoint"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "enabled_cloudwatch_logs_exports" {
@@ -144,7 +144,7 @@ variable "engine_mode" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "8.0.mysql_aurora.3.06.0"
+  default     = "8.0.mysql_aurora.3.07.1"
 }
 
 variable "final_snapshot_identifier" {
@@ -383,6 +383,7 @@ variable "source_region" {
 variable "source_security_group_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#source_security_group_id"
   type        = string
+  default     = ""
 }
 
 variable "storage_type" {
@@ -468,3 +469,32 @@ variable "enabled" {
   default     = true
 }
 
+variable "enable_source_security_group" {
+  description = "Enable source security group"
+  type        = bool
+  default     = true
+}
+
+variable "enable_shared_snapshot" {
+  description = "Enable snapshot account share"
+  type        = bool
+  default     = false
+}
+
+variable "shared_accounts_snapshot" {
+  description = "AWS accounts to share the RDS cluster snapshot"
+  type        = list(string)
+  default     = []
+}
+
+variable "db_cluster_snapshot_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_snapshot#db_cluster_snapshot_identifier"
+  type        = string
+  default     = null
+}
+
+variable "enable_secrets_manager" {
+  description = "Enable AWS Secrets Manager"
+  type        = bool
+  default     = false
+}
