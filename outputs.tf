@@ -90,3 +90,8 @@ output "secret_manager_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret#arn"
   value       = var.enabled && var.enable_secrets_manager ? aws_secretsmanager_secret.this[0].arn : ""
 }
+
+output "bucket" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#bucket"
+  value       = var.enabled && var.create_s3 ? module.s3[0].bucket : ""
+}
