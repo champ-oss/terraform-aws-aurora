@@ -51,4 +51,5 @@ module "this" {
   enable_s3_export                    = true
   s3_export_schedule_expression       = "rate(2 hours)"
   metric_alarms_enabled               = true
+  enable_backup                       = true
 }
