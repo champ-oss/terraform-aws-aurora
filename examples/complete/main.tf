@@ -26,6 +26,10 @@ data "aws_subnets" "this" {
   }
 }
 
+resource "random_id" "this" {
+  byte_length = 3
+}
+
 resource "aws_security_group" "test" {
   name_prefix = "test-aurora-"
   vpc_id      = data.aws_vpcs.this.ids[0]
@@ -34,7 +38,7 @@ resource "aws_security_group" "test" {
 module "this" {
   source                              = "../../"
   backup_retention_period             = 1
-  cluster_identifier_prefix           = "terraform-aws-aurora-mysql-test2-cluster"
+  cluster_identifier_prefix           = "terraform-aws-aurora-${random_id.this.hex}"
   cluster_instance_count              = 1
   iam_database_authentication_enabled = true
   private_subnet_ids                  = data.aws_subnets.this.ids
