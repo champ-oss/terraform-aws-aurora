@@ -40,14 +40,15 @@ resource "aws_security_group" "test" {
 }
 
 module "this" {
-  source                    = "../../"
-  cluster_identifier_prefix = "terraform-aws-aurora-${random_id.this.hex}"
-  private_subnet_ids        = data.aws_subnets.this.ids
-  protect                   = false
-  skip_final_snapshot       = true
-  source_security_group_id  = aws_security_group.test.id
-  vpc_id                    = data.aws_vpcs.this.ids[0]
-  enable_secrets_manager    = true
-  engine                    = "aurora-postgresql"
-  engine_version            = "16.6"
+  source                          = "../../"
+  cluster_identifier_prefix       = "terraform-aws-aurora-${random_id.this.hex}"
+  private_subnet_ids              = data.aws_subnets.this.ids
+  protect                         = false
+  skip_final_snapshot             = true
+  source_security_group_id        = aws_security_group.test.id
+  vpc_id                          = data.aws_vpcs.this.ids[0]
+  enable_secrets_manager          = true
+  engine                          = "aurora-postgresql"
+  engine_version                  = "16.6"
+  enabled_cloudwatch_logs_exports = ["general", "postgresql", "iam-db-auth-error"]
 }
