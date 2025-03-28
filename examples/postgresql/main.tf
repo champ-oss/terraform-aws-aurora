@@ -50,5 +50,5 @@ module "this" {
   enable_secrets_manager          = true
   engine                          = "aurora-postgresql"
   engine_version                  = "16.6"
-  enabled_cloudwatch_logs_exports = ["general", "postgresql", "iam-db-auth-error"]
+  enabled_cloudwatch_logs_exports = ["postgresql", "iam-db-auth-error"]
 }
