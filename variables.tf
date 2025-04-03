@@ -433,6 +433,12 @@ variable "dms_endpoint_type" {
   default     = "target"
 }
 
+variable "dms_engine_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#engine_name"
+  type        = string
+  default     = "aurora"
+}
+
 variable "create_iam_role" {
   description = "Create an IAM role and attach to the RDS cluster"
   type        = bool
