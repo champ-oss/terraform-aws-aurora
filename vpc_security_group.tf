@@ -34,9 +34,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_self" {
 resource "aws_vpc_security_group_egress_rule" "egress" {
   count             = var.enabled && !var.enabled_legacy_secruity_group_rule ? 1 : 0
   description       = "egress internet"
-  from_port         = 0
-  to_port           = 65535
-  ip_protocol       = "all"
+  ip_protocol       = "-1" # all ports
   security_group_id = aws_security_group.rds[0].id
   cidr_ipv4         = "0.0.0.0/0"
   tags              = merge(local.tags, var.tags)
