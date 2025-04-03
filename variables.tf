@@ -421,6 +421,12 @@ variable "enable_glue_connection" {
   default     = false
 }
 
+variable "glue_jdbc_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_connection#connection_properties"
+  type        = string
+  default     = "mysql"
+}
+
 variable "create_dms_endpoint" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
   type        = bool
