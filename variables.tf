@@ -439,6 +439,12 @@ variable "dms_engine_name" {
   default     = "aurora"
 }
 
+variable "dms_endpoint_read_only" {
+  description = "Use reader database endpoint for DMS"
+  type        = bool
+  default     = false
+}
+
 variable "create_iam_role" {
   description = "Create an IAM role and attach to the RDS cluster"
   type        = bool
