@@ -421,6 +421,12 @@ variable "enable_glue_connection" {
   default     = false
 }
 
+variable "glue_jdbc_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_connection#connection_properties"
+  type        = string
+  default     = "mysql"
+}
+
 variable "create_dms_endpoint" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
   type        = bool
@@ -431,6 +437,18 @@ variable "dms_endpoint_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
   type        = string
   default     = "target"
+}
+
+variable "dms_engine_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#engine_name"
+  type        = string
+  default     = "aurora"
+}
+
+variable "dms_endpoint_read_only" {
+  description = "Use reader database endpoint for DMS"
+  type        = bool
+  default     = false
 }
 
 variable "create_iam_role" {

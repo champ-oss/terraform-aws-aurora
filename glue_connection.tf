@@ -3,7 +3,7 @@ resource "aws_glue_connection" "this" {
   name  = aws_rds_cluster.this[0].cluster_identifier
   tags  = merge(local.tags, var.tags)
   connection_properties = {
-    JDBC_CONNECTION_URL = "jdbc:mysql://${aws_rds_cluster.this[0].endpoint}:${aws_rds_cluster.this[0].port}/${aws_rds_cluster.this[0].database_name}"
+    JDBC_CONNECTION_URL = "jdbc:${var.glue_jdbc_type}://${aws_rds_cluster.this[0].endpoint}:${aws_rds_cluster.this[0].port}/${aws_rds_cluster.this[0].database_name}"
     PASSWORD            = aws_rds_cluster.this[0].master_password
     USERNAME            = aws_rds_cluster.this[0].master_username
   }
