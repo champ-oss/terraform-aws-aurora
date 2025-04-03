@@ -51,4 +51,10 @@ module "this" {
   engine                          = "aurora-postgresql"
   engine_version                  = "16.6"
   enabled_cloudwatch_logs_exports = ["postgresql", "iam-db-auth-error"]
+  performance_insights_enabled    = true
+  enable_glue_connection          = true
+  create_dms_endpoint             = true
+  dms_endpoint_type               = "target"
+  create_iam_role                 = true
+  enable_secrets_manager          = true
 }
