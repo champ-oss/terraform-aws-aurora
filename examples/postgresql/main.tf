@@ -56,5 +56,4 @@ module "this" {
   create_dms_endpoint             = true
   dms_endpoint_type               = "target"
   create_iam_role                 = true
-  enable_secrets_manager          = true
 }
