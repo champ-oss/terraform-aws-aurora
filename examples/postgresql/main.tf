@@ -57,4 +57,5 @@ module "this" {
   dms_engine_name                 = "aurora-postgresql"
   dms_endpoint_type               = "target"
   create_iam_role                 = true
+  create_s3                       = true
 }
