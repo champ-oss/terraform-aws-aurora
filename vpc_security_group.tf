@@ -6,6 +6,7 @@ resource "aws_vpc_security_group_ingress_rule" "from_sg" {
   ip_protocol                  = "tcp"
   security_group_id            = aws_security_group.rds[0].id
   referenced_security_group_id = var.source_security_group_id
+  tags                         = merge(local.tags, var.tags)
 }
 
 resource "aws_vpc_security_group_ingress_rule" "from_cidr" {
@@ -15,7 +16,8 @@ resource "aws_vpc_security_group_ingress_rule" "from_cidr" {
   to_port           = aws_rds_cluster.this[0].port
   ip_protocol       = "tcp"
   security_group_id = aws_security_group.rds[0].id
-  cidr_ipv4         = var.cidr_blocks
+  tags              = merge(local.tags, var.tags)
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ingress_self" {
@@ -26,6 +28,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_self" {
   ip_protocol                  = "tcp"
   security_group_id            = aws_security_group.rds[0].id
   referenced_security_group_id = aws_security_group.rds[0].id
+  tags                         = merge(local.tags, var.tags)
 }
 
 resource "aws_vpc_security_group_egress_rule" "egress" {
@@ -35,6 +38,6 @@ resource "aws_vpc_security_group_egress_rule" "egress" {
   to_port           = 65535
   ip_protocol       = "all"
   security_group_id = aws_security_group.rds[0].id
-  cidr_ipv4         = ["0.0.0.0/0"]
-
+  cidr_ipv4         = "0.0.0.0/0"
+  tags              = merge(local.tags, var.tags)
 }
