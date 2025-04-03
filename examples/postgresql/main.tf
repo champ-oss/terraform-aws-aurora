@@ -54,6 +54,7 @@ module "this" {
   performance_insights_enabled    = true
   enable_glue_connection          = true
   create_dms_endpoint             = true
+  dms_engine_name                 = "aurora-postgresql"
   dms_endpoint_type               = "target"
   create_iam_role                 = true
 }
