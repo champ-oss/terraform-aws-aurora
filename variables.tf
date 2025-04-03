@@ -540,3 +540,9 @@ variable "backup_schedule" {
   type        = string
   default     = "cron(0 6 * * ? *)"
 }
+
+variable "enabled_legacy_secruity_group_rule" {
+  description = "Enable security group rule"
+  type        = bool
+  default     = true
+}

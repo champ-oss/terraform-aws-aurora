@@ -10,7 +10,7 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_security_group_rule" "from_sg" {
-  count                    = var.enabled && var.enable_source_security_group ? 1 : 0
+  count                    = var.enabled && var.enable_source_security_group && var.enabled_legacy_secruity_group_rule ? 1 : 0
   description              = "ingress from security group"
   type                     = "ingress"
   from_port                = aws_rds_cluster.this[0].port
@@ -21,7 +21,7 @@ resource "aws_security_group_rule" "from_sg" {
 }
 
 resource "aws_security_group_rule" "from_cidr" {
-  count             = var.enabled ? 1 : 0
+  count             = var.enabled && var.enabled_legacy_secruity_group_rule ? 1 : 0
   description       = "ingress from cidr blocks"
   type              = "ingress"
   from_port         = aws_rds_cluster.this[0].port
@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "from_cidr" {
 }
 
 resource "aws_security_group_rule" "ingress_self" {
-  count                    = var.enabled ? 1 : 0
+  count                    = var.enabled && var.enabled_legacy_secruity_group_rule ? 1 : 0
   description              = "ingress self reference"
   type                     = "ingress"
   from_port                = 0
@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "ingress_self" {
 }
 
 resource "aws_security_group_rule" "egress" {
-  count             = var.enabled ? 1 : 0
+  count             = var.enabled && var.enabled_legacy_secruity_group_rule ? 1 : 0
   description       = "egress internet"
   type              = "egress"
   from_port         = 0
