@@ -540,3 +540,9 @@ variable "backup_schedule" {
   type        = string
   default     = "cron(0 6 * * ? *)"
 }
+
+variable "seconds_until_auto_pause" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
+  type        = number
+  default     = null
+}
