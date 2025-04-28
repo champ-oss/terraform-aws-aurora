@@ -80,7 +80,7 @@ resource "aws_rds_cluster" "this" {
   serverlessv2_scaling_configuration {
     max_capacity             = var.max_capacity # increment must be 0.5
     min_capacity             = var.min_capacity # increment must be 0.5
-    seconds_until_auto_pause = var.seconds_until_auto_pause # null by default
+    seconds_until_auto_pause = var.seconds_until_auto_pause
   }
 
   # tflint-ignore: terraform_comment_syntax
