@@ -78,8 +78,9 @@ resource "aws_rds_cluster" "this" {
   vpc_security_group_ids              = [aws_security_group.rds[0].id]
 
   serverlessv2_scaling_configuration {
-    max_capacity = var.max_capacity
-    min_capacity = var.min_capacity
+    max_capacity             = var.max_capacity # increment must be 0.5
+    min_capacity             = var.min_capacity # increment must be 0.5
+    seconds_until_auto_pause = var.seconds_until_auto_pause
   }
 
   # tflint-ignore: terraform_comment_syntax
