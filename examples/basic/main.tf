@@ -40,7 +40,7 @@ module "this" {
   source_security_group_id  = aws_security_group.test.id
   vpc_id                    = data.aws_vpcs.this.ids[0]
   seconds_until_auto_pause  = 300
-  min_capacity = 0
+  enable_auto_pause         = true
   max_capacity = 2
 }
 
