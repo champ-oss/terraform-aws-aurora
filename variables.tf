@@ -204,7 +204,7 @@ variable "master_username" {
 variable "min_capacity" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#min_capacity"
   type        = number
-  default     = 0.5
+  default     = 0
 }
 
 variable "max_capacity" {
@@ -496,7 +496,7 @@ variable "db_cluster_snapshot_identifier" {
 variable "seconds_until_auto_pause" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
   type        = number
-  default     = null
+  default     = 300
 }
 
 variable "enable_auto_pause" {
