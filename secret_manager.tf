@@ -16,7 +16,7 @@ locals {
     username            = try(aws_rds_cluster.this[0].master_username, "")
     password            = random_password.password[0].result
     port                = try(aws_rds_cluster.this[0].port, "")
-    host                = Try(aws_rds_cluster.this[0].reader_endpoint, "") # read-only queries for RDS Query Editor
+    host                = try(aws_rds_cluster.this[0].reader_endpoint, "") # read-only queries for RDS Query Editor
     engine              = "mysql"
     dbClusterIdentifier = try(aws_rds_cluster.this[0].cluster_identifier, "")
     dbname              = try(aws_rds_cluster.this[0].database_name, "")
