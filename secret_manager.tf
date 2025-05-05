@@ -13,13 +13,13 @@ resource "aws_secretsmanager_secret_version" "this" {
 # https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html#reference_secret_json_structure_rds
 locals {
   secret_value = {
-    username            = aws_rds_cluster.this[0].master_username
-    password            = random_password.password[0].result
-    port                = aws_rds_cluster.this[0].port
-    host                = aws_rds_cluster.this[0].reader_endpoint # read-only queries for RDS Query Editor
+    username            = try(aws_rds_cluster.this[0].master_username, "")
+    password            = try(random_password.password[0].result, "")
+    port                = try(aws_rds_cluster.this[0].port, "")
+    host                = try(aws_rds_cluster.this[0].reader_endpoint, "") # read-only queries for RDS Query Editor
     engine              = "mysql"
-    dbClusterIdentifier = aws_rds_cluster.this[0].cluster_identifier
-    dbname              = aws_rds_cluster.this[0].database_name
-    read_write_endpoint = aws_rds_cluster.this[0].endpoint # endpoint used for read-write queries
+    dbClusterIdentifier = try(aws_rds_cluster.this[0].cluster_identifier, "")
+    dbname              = try(aws_rds_cluster.this[0].database_name, "")
+    read_write_endpoint = try(aws_rds_cluster.this[0].endpoint, "") # endpoint used for read-write queries
   }
 }
