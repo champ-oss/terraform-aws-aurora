@@ -14,7 +14,7 @@ resource "aws_secretsmanager_secret_version" "this" {
 locals {
   secret_value = {
     username            = try(aws_rds_cluster.this[0].master_username, "")
-    password            = random_password.password[0].result
+    password            = try(random_password.password[0].result, "")
     port                = try(aws_rds_cluster.this[0].port, "")
     host                = try(aws_rds_cluster.this[0].reader_endpoint, "") # read-only queries for RDS Query Editor
     engine              = "mysql"
