@@ -64,6 +64,7 @@ resource "aws_rds_cluster" "this" {
   kms_key_id                          = var.create_kms ? module.kms[0].arn : var.kms_key_id
   master_username                     = var.master_username
   master_password                     = random_password.password[0].result
+  delete_automated_backups            = false
   network_type                        = var.network_type
   port                                = var.port
   preferred_backup_window             = var.preferred_backup_window
