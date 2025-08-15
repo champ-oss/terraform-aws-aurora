@@ -49,6 +49,6 @@ module "this" {
   vpc_id                    = data.aws_vpcs.this.ids[0]
   enable_secrets_manager    = true
   seconds_until_auto_pause  = 300
-  min_capacity = 0
+  min_capacity = 1
   max_capacity = 2
 }
