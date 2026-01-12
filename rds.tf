@@ -1,6 +1,6 @@
 locals {
   normalized_snapshot_identifier = (
-    var.snapshot_identifier != null && trim(var.snapshot_identifier) != ""
+    var.snapshot_identifier != null && trimspace(var.snapshot_identifier) != ""
     ? var.snapshot_identifier
     : null
   )
