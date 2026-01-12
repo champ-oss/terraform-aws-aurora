@@ -108,13 +108,13 @@ resource "aws_rds_cluster" "this" {
 
     precondition {
       condition = (
-        local.normalized_snapshot_identifier != null ||
-        try(aws_rds_cluster.this[0].snapshot_identifier, null) == null
+      var.snapshot_identifier == null ||
+      trimspace(var.snapshot_identifier) != ""
       )
       error_message = <<EOT
-Refusing to destroy or replace the RDS cluster because snapshot_identifier
-was removed or set to an empty value. To intentionally rebuild, provide
-a non-empty snapshot ARN.
+snapshot_identifier cannot be set to an empty string.
+Use null to keep the existing database, or provide a valid snapshot ARN
+to intentionally replace the cluster.
 EOT
     }
 
