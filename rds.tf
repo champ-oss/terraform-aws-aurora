@@ -2,7 +2,7 @@ locals {
   normalized_snapshot_identifier = (
     var.snapshot_identifier != null && trimspace(var.snapshot_identifier) != ""
     ? var.snapshot_identifier
-    : null
+    : local.db_snapshot_source
   )
 }
 
@@ -104,6 +104,20 @@ resource "aws_rds_cluster" "this" {
   }
 
   lifecycle {
+    prevent_destroy = true
+
+    precondition {
+      condition = (
+        local.normalized_snapshot_identifier != null ||
+        try(aws_rds_cluster.this[0].snapshot_identifier, null) == null
+      )
+      error_message = <<EOT
+Refusing to destroy or replace the RDS cluster because snapshot_identifier
+was removed or set to an empty value. To intentionally rebuild, provide
+a non-empty snapshot ARN.
+EOT
+    }
+
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
@@ -141,23 +155,6 @@ resource "aws_rds_cluster_instance" "this" {
       engine_version,
       identifier_prefix
     ]
-  }
-  precondition {
-    condition = (
-      local.normalized_snapshot_identifier == null ||
-      trim(local.normalized_snapshot_identifier) != ""
-    )
-    error_message = <<EOT
-      snapshot_identifier may not be removed or set to an empty value.
-
-      Allowed:
-      - null → valid snapshot ARN
-      - valid snapshot ARN → another valid snapshot ARN
-
-      Blocked:
-      - valid snapshot ARN → null
-      - valid snapshot ARN → ""
-    EOT
   }
 }
 
