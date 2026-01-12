@@ -1,3 +1,11 @@
+locals {
+  normalized_snapshot_identifier = (
+    var.snapshot_identifier != null && trim(var.snapshot_identifier) != ""
+    ? var.snapshot_identifier
+    : null
+  )
+}
+
 resource "random_password" "password" {
   count   = var.enabled ? 1 : 0
   length  = 32
@@ -70,7 +78,7 @@ resource "aws_rds_cluster" "this" {
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
   skip_final_snapshot                 = var.skip_final_snapshot
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
+  snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
   storage_encrypted                   = var.storage_encrypted
@@ -99,7 +107,6 @@ resource "aws_rds_cluster" "this" {
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
-      snapshot_identifier,
       engine_version,
       cluster_identifier_prefix
     ]
@@ -134,6 +141,23 @@ resource "aws_rds_cluster_instance" "this" {
       engine_version,
       identifier_prefix
     ]
+  }
+  precondition {
+    condition = (
+      local.normalized_snapshot_identifier == null ||
+      trim(local.normalized_snapshot_identifier) != ""
+    )
+    error_message = <<EOT
+      snapshot_identifier may not be removed or set to an empty value.
+
+      Allowed:
+      - null → valid snapshot ARN
+      - valid snapshot ARN → another valid snapshot ARN
+
+      Blocked:
+      - valid snapshot ARN → null
+      - valid snapshot ARN → ""
+    EOT
   }
 }
 
