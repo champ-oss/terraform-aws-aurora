@@ -1,10 +1,10 @@
 locals {
-  normalized_snapshot_identifier = (
-    var.snapshot_identifier != null && trimspace(var.snapshot_identifier) != ""
+  normalized_snapshot_identifier =
+    trimspace(coalesce(var.snapshot_identifier, "")) != ""
     ? var.snapshot_identifier
     : local.db_snapshot_source
-  )
 }
+
 
 resource "random_password" "password" {
   count   = var.enabled ? 1 : 0
@@ -108,13 +108,13 @@ resource "aws_rds_cluster" "this" {
 
     precondition {
       condition = (
-      var.snapshot_identifier == null ||
-      trimspace(var.snapshot_identifier) != ""
+      trimspace(coalesce(var.snapshot_identifier, "")) != ""
+      || var.snapshot_identifier == null
       )
       error_message = <<EOT
-snapshot_identifier cannot be set to an empty string.
+snapshot_identifier cannot be an empty string.
 Use null to keep the existing database, or provide a valid snapshot ARN
-to intentionally replace the cluster.
+to intentionally restore from snapshot.
 EOT
     }
 
