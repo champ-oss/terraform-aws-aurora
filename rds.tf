@@ -1,6 +1,6 @@
 locals {
   normalized_snapshot_identifier = (
-    var.snapshot_identifier != null && trimspace(var.snapshot_identifier) != ""
+    can(trimspace(var.snapshot_identifier)) && trimspace(var.snapshot_identifier) != ""
     ? var.snapshot_identifier
     : local.db_snapshot_source
   )
@@ -109,13 +109,14 @@ resource "aws_rds_cluster" "this" {
 
     precondition {
       condition = (
-      var.snapshot_identifier == null ||
-      trimspace(var.snapshot_identifier) != ""
+        var.snapshot_identifier == null ||
+        (can(trimspace(var.snapshot_identifier)) &&
+        trimspace(var.snapshot_identifier) != "")
       )
       error_message = <<EOT
 snapshot_identifier must be null or a non-empty string.
 Use null to keep the existing database, or provide a valid snapshot ARN
-to intentionally replace the cluster.
+to intentionally restore from snapshot.
 EOT
     }
 
