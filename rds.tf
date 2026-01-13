@@ -2,7 +2,7 @@ locals {
   normalized_snapshot_identifier = (
     var.snapshot_identifier != null && var.snapshot_identifier != ""
     ? var.snapshot_identifier
-    : local.db_snapshot_source
+    : null
   )
 }
 
@@ -20,12 +20,6 @@ resource "random_password" "password" {
 moved {
   from = random_password.password
   to   = random_password.password[0]
-}
-
-data "aws_db_snapshot" "this" {
-  count                  = var.enabled && var.db_snapshot_source_arn != null ? 1 : 0
-  db_snapshot_identifier = var.db_snapshot_source_arn
-  snapshot_type          = "manual"
 }
 
 resource "aws_db_subnet_group" "this" {
