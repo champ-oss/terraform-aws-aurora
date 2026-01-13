@@ -1,8 +1,9 @@
 locals {
-  normalized_snapshot_identifier =
+  normalized_snapshot_identifier = (
     trimspace(coalesce(var.snapshot_identifier, "")) != ""
     ? var.snapshot_identifier
-    : local.db_snapshot_source
+    : null
+  )
 }
 
 
@@ -108,8 +109,8 @@ resource "aws_rds_cluster" "this" {
 
     precondition {
       condition = (
-      trimspace(coalesce(var.snapshot_identifier, "")) != ""
-      || var.snapshot_identifier == null
+        trimspace(coalesce(var.snapshot_identifier, "")) != ""
+        || var.snapshot_identifier == null
       )
       error_message = <<EOT
 snapshot_identifier cannot be an empty string.
