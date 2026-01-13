@@ -114,16 +114,13 @@ resource "aws_rds_cluster" "this" {
       )
       error_message = "snapshot_identifier must be null or a non-empty string."
     }
+    ignore_changes = [
+      availability_zones,
+      final_snapshot_identifier,
+      engine_version,
+      cluster_identifier_prefix
+    ]
   }
-
-
-  ignore_changes = [
-    availability_zones,
-    final_snapshot_identifier,
-    engine_version,
-    cluster_identifier_prefix
-  ]
-
 }
 
 moved {
