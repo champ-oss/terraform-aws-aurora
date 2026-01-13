@@ -99,8 +99,6 @@ resource "aws_rds_cluster" "this" {
   }
 
   lifecycle {
-    prevent_destroy = true
-
     precondition {
       condition = (
         var.snapshot_identifier == null ||
