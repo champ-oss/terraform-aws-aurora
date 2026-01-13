@@ -1,6 +1,6 @@
 locals {
   normalized_snapshot_identifier = (
-    trimspace(try(var.snapshot_identifier, "")) != ""
+    var.snapshot_identifier != null && trimspace(var.snapshot_identifier) != ""
     ? var.snapshot_identifier
     : local.db_snapshot_source
   )
@@ -109,11 +109,16 @@ resource "aws_rds_cluster" "this" {
 
     precondition {
       condition = (
-        var.snapshot_identifier == null ||
-        trimspace(try(var.snapshot_identifier, "")) != ""
+      var.snapshot_identifier == null ||
+      trimspace(var.snapshot_identifier) != ""
       )
-      error_message = "snapshot_identifier must be null or a non-empty string."
+      error_message = <<EOT
+snapshot_identifier must be null or a non-empty string.
+Use null to keep the existing database, or provide a valid snapshot ARN
+to intentionally replace the cluster.
+EOT
     }
+
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
