@@ -108,9 +108,9 @@ resource "aws_rds_cluster" "this" {
         can(startswith(var.snapshot_identifier, "arn:"))
       )
       error_message = <<EOT
-snapshot_identifier must be null or a non-empty string.
-Use null to keep the existing database, or provide a snapshot ARN
-to intentionally restore.
+snapshot_identifier must be null, empty, or a valid snapshot ARN.
+- Leave it null or empty to create a new database.
+- Provide a snapshot ARN to restore.
 EOT
     }
 
