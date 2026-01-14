@@ -72,7 +72,7 @@ resource "aws_rds_cluster" "this" {
   preferred_backup_window             = var.preferred_backup_window
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
-  skip_final_snapshot                 = var.skip_final_snapshot
+  skip_final_snapshot                 = false
   snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
