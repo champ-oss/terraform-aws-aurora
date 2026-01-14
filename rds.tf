@@ -103,13 +103,23 @@ resource "aws_rds_cluster" "this" {
       condition = (
         var.snapshot_identifier == null ||
         var.snapshot_identifier == "" ||
-        can(startswith(var.snapshot_identifier, "arn:"))
+        (
+          can(startswith(var.snapshot_identifier, "arn:")) &&
+          var.protect == false
+        )
       )
       error_message = <<EOT
-snapshot_identifier must be null, empty, or a valid snapshot ARN.
-- Leave it null or empty to create a new database.
-- Provide a snapshot ARN to restore.
-EOT
+        Invalid snapshot restore configuration.
+
+        Allowed values:
+        - snapshot_identifier = null or "" → create or keep existing database
+        - snapshot_identifier = snapshot ARN → restore from snapshot (requires protect = false)
+
+        Restore steps:
+        1. Set protect = false and apply
+        2. Set snapshot_identifier to the snapshot ARN and apply
+        3. Re-enable protect = true and apply
+      EOT
     }
 
     ignore_changes = [
