@@ -72,7 +72,7 @@ resource "aws_rds_cluster" "this" {
   preferred_backup_window             = var.preferred_backup_window
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
-  skip_final_snapshot                 = false
+  skip_final_snapshot                 = var.skip_final_snapshot
   snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
@@ -105,7 +105,8 @@ resource "aws_rds_cluster" "this" {
         var.snapshot_identifier == "" ||
         (
           can(startswith(var.snapshot_identifier, "arn:")) &&
-          var.protect == false
+          var.protect == false &&
+          var.skip_final_snapshot == false
         )
       )
       error_message = <<EOT
@@ -113,7 +114,9 @@ resource "aws_rds_cluster" "this" {
 
         Allowed values:
         - snapshot_identifier = null or "" → create or keep existing database
-        - snapshot_identifier = snapshot ARN → restore from snapshot (requires protect = false)
+        - snapshot_identifier = snapshot ARN → restore from snapshot (requires protect = false), and skip_final_snapshot = false
+
+        When restoring from a snapshot ARN, the following steps are required to later re-enable protection:
 
         Restore steps:
         1. Set protect = false and apply

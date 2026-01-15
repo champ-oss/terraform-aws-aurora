@@ -534,3 +534,9 @@ variable "seconds_until_auto_pause" {
   type        = number
   default     = null
 }
+
+variable "skip_final_snapshot" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
+  type        = bool
+  default     = false
+}
