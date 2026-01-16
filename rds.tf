@@ -1,3 +1,12 @@
+locals {
+  normalized_snapshot_identifier = (
+    can(startswith(var.snapshot_identifier, "arn:"))
+    ? var.snapshot_identifier
+    : null
+  )
+}
+
+
 resource "random_password" "password" {
   count   = var.enabled ? 1 : 0
   length  = 32
@@ -11,12 +20,6 @@ resource "random_password" "password" {
 moved {
   from = random_password.password
   to   = random_password.password[0]
-}
-
-data "aws_db_snapshot" "this" {
-  count                  = var.enabled && var.db_snapshot_source_arn != null ? 1 : 0
-  db_snapshot_identifier = var.db_snapshot_source_arn
-  snapshot_type          = "manual"
 }
 
 resource "aws_db_subnet_group" "this" {
@@ -70,7 +73,7 @@ resource "aws_rds_cluster" "this" {
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
   skip_final_snapshot                 = var.skip_final_snapshot
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
+  snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
   storage_encrypted                   = var.storage_encrypted
@@ -96,10 +99,35 @@ resource "aws_rds_cluster" "this" {
   }
 
   lifecycle {
+    precondition {
+      condition = (
+        var.snapshot_identifier == null ||
+        var.snapshot_identifier == "" ||
+        (
+          can(startswith(var.snapshot_identifier, "arn:")) &&
+          var.protect == false &&
+          var.skip_final_snapshot == false
+        )
+      )
+      error_message = <<EOT
+        Invalid snapshot restore configuration.
+
+        Allowed values:
+        - snapshot_identifier = null or "" → create or keep existing database
+        - snapshot_identifier = snapshot ARN → restore from snapshot (requires protect = false), and skip_final_snapshot = false
+
+        When restoring from a snapshot ARN, the following steps are required to later re-enable protection:
+
+        Restore steps:
+        1. Set protect = false and apply
+        2. Set snapshot_identifier to the snapshot ARN and make sure skip_final_snapshot = false, then apply
+        3. Re-enable protect = true and apply
+      EOT
+    }
+
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
-      snapshot_identifier,
       engine_version,
       cluster_identifier_prefix
     ]

@@ -94,12 +94,6 @@ variable "db_instance_parameter_group_name" {
   default     = null
 }
 
-variable "db_snapshot_source_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
-  type        = string
-  default     = null
-}
-
 variable "deletion_window_in_days" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#deletion_window_in_days"
   type        = number
@@ -356,12 +350,6 @@ variable "shared_accounts" {
   default     = []
 }
 
-variable "skip_final_snapshot" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
-  default     = false
-  type        = bool
-}
-
 variable "snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
   type        = string
@@ -545,4 +533,10 @@ variable "seconds_until_auto_pause" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#seconds_until_auto_pause"
   type        = number
   default     = null
+}
+
+variable "skip_final_snapshot" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
+  type        = bool
+  default     = false
 }
