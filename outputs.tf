@@ -96,7 +96,7 @@ output "bucket" {
   value       = var.enabled && var.create_s3 ? module.s3[0].bucket : ""
 }
 
-output "instances" {
+output "instance_identifiers" {
   description = "List of RDS Cluster Instance Identifiers"
-  value       = var.enabled && length(aws_rds_cluster_instance.this) > 0 ? [for i in aws_rds_cluster_instance.this : i.identifier] : []
+  value       = try(aws_rds_cluster_instance.this[*].identifier, [])
 }
