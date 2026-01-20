@@ -95,3 +95,8 @@ output "bucket" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#bucket"
   value       = var.enabled && var.create_s3 ? module.s3[0].bucket : ""
 }
+
+output "instances" {
+  description = "List of RDS Cluster Instance Identifiers"
+  value       = var.enabled && var.cluster_instance_count > 0 ? aws_rds_cluster_instance.this[*].id : []
+}
