@@ -98,5 +98,5 @@ output "bucket" {
 
 output "instances" {
   description = "List of RDS Cluster Instance Identifiers"
-  value       = var.enabled && var.cluster_instance_count > 0 ? aws_rds_cluster_instance.this[*].id : []
+  value       = var.enabled && length(aws_rds_cluster_instance.this) > 0 ? [for i in aws_rds_cluster_instance.this : i.identifier] : []
 }
