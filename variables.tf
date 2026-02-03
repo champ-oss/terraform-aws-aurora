@@ -542,7 +542,7 @@ variable "skip_final_snapshot" {
 }
 
 variable "shared_snapshot_version" {
-  type        = number
-  description = "Increment to create a new shared DB cluster snapshot"
-  default     = 1
+  description = "Version tag for the shared snapshot identifier"
+  type        = string
+  default     = "1" # increment to create a new shared snapshot
 }
