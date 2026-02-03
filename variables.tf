@@ -540,3 +540,9 @@ variable "skip_final_snapshot" {
   type        = bool
   default     = false
 }
+
+variable "shared_snapshot_version" {
+  type        = number
+  description = "Increment to create a new shared DB cluster snapshot"
+  default     = 1
+}
