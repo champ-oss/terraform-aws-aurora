@@ -1,12 +1,20 @@
 resource "aws_secretsmanager_secret" "this" {
   count = var.enabled && var.enable_secrets_manager ? 1 : 0
   name  = "/${var.git}/mysql/${aws_rds_cluster.this[0].cluster_identifier}"
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 resource "aws_secretsmanager_secret_version" "this" {
   count         = var.enabled && var.enable_secrets_manager ? 1 : 0
   secret_id     = aws_secretsmanager_secret.this[0].id
   secret_string = jsonencode(local.secret_value)
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 # Amazon RDS key value requirements

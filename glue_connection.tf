@@ -13,4 +13,8 @@ resource "aws_glue_connection" "this" {
     security_group_id_list = [aws_security_group.rds[0].id]
     subnet_id              = element(var.private_subnet_ids, 0)
   }
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }

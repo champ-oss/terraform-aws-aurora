@@ -23,4 +23,8 @@ resource "aws_scheduler_schedule" "universal_target" {
       "\\u003e", ">"),
     "\\u003c", "<")
   }
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }

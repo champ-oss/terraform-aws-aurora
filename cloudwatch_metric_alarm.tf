@@ -16,4 +16,8 @@ resource "aws_cloudwatch_metric_alarm" "this" {
   dimensions = {
     DBClusterIdentifier = aws_rds_cluster.this[0].cluster_identifier
   }
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
