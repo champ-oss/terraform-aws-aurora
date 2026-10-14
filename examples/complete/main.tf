@@ -64,8 +64,8 @@ module "this" {
 }
 
 resource "aws_rds_cluster_parameter_group" "this" {
-  name   = "test-aurora-mysql8.5"
-  family = "aurora-mysql8.5"
+  name   = "test-aurora-mysql8.4"
+  family = "aurora-mysql8.4"
 
   parameter {
     name  = "character_set_server"
