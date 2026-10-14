@@ -59,4 +59,45 @@ module "this" {
   s3_export_schedule_expression       = "rate(2 hours)"
   metric_alarms_enabled               = true
   enable_backup                       = true
+  engine_version                      = "8.4.mysql_aurora.8.4.7"
+  db_cluster_parameter_group_name     = aws_rds_cluster_parameter_group.this.name
+}
+
+resource "aws_rds_cluster_parameter_group" "this" {
+  name   = "test-aurora-mysql8.5"
+  family = "aurora-mysql8.5"
+
+  parameter {
+    name  = "character_set_server"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "character_set_client"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "collation_server"
+    value = "utf8_general_ci"
+  }
+
+  parameter {
+    name  = "event_scheduler"
+    value = "ON"
+  }
+
+  parameter {
+    name  = "innodb_stats_on_metadata"
+    value = "1"
+  }
+
+  parameter {
+    name  = "require_secure_transport"
+    value = "OFF"
+  }
+
+  lifecycle {
+    ignore_changes = [name]
+  }
 }
